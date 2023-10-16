@@ -30,7 +30,7 @@ export default function AmbitionBar(){
         <div>
             <div className='ambition-bar'>
                 <label htmlFor='completed'>Ambition: </label>
-                <progress id="completed" max={120000} value={difference?difference:0}></progress>
+                <progress id="completed" max={(1000*60*60*24*30)} value={difference?difference:0}></progress>
             </div>
         </div>
     )

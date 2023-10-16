@@ -11,7 +11,7 @@ import ViewGoal from './components/ViewGoal/ViewGoal'
 
 const GoalContext:any = createContext(null)
 
-function App() {
+export default function App() {
   const goalsFromLS = localStorage.getItem('goals')
   const parsedGoalsFromLS = goalsFromLS ? JSON.parse(goalsFromLS) : null
   const [goalsLS, setGoalsLS] = useState<goalFormType[]|null>(parsedGoalsFromLS)
@@ -73,15 +73,21 @@ function App() {
       }
     })
 
-    updatedGoals[indexForGoal].milestones[milestoneIndex].checked = !updatedGoals[indexForGoal].milestones[milestoneIndex].checked
+    const checkedMilestone = updatedGoals[indexForGoal].milestones[milestoneIndex]
+
+    checkedMilestone.checked = !checkedMilestone.checked
     
-    if(!updatedGoals[indexForGoal].milestones[milestoneIndex].feedAmbition){
-      updatedGoals[indexForGoal].milestones[milestoneIndex].feedAmbition=true
+    if(!checkedMilestone.feedAmbition){
+      checkedMilestone.feedAmbition=true
       const dd = JSON.parse(localStorage.getItem('doomsday'))
+      const maxTime = (1000*60*60*24*30)
+      let extraTime =  (1000*60*60*24*3)
+      extraTime = dd-new Date().getTime()>maxTime?0:extraTime
+      
       if(dd && dd>new Date().getTime()){
-        localStorage.setItem('doomsday', JSON.stringify(dd+10000))
+        localStorage.setItem('doomsday', JSON.stringify(dd+extraTime))
       } else {
-        localStorage.setItem('doomsday', JSON.stringify(new Date().getTime()+10000))
+        localStorage.setItem('doomsday', JSON.stringify(new Date().getTime()+extraTime))
       }
     }
 
@@ -139,6 +145,5 @@ function App() {
   )
 }
 
-export default App
 export { GoalContext }
 
