@@ -19,7 +19,7 @@ export default function ViewGoal({id, goals}){
     }
 
     if (!goal) {
-        return <div>Goal not found</div>;
+        return <div></div>;
       }
       
     return (
@@ -29,7 +29,7 @@ export default function ViewGoal({id, goals}){
                 <p className='view-goal-description'>{goal.description}</p>
             </div>
             <div className='view-goal-milestones '>
-            {getMilestoneElements()}           
+                {getMilestoneElements()}           
             </div> 
         </div>
     )

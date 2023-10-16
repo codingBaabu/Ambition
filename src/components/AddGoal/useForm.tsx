@@ -44,7 +44,7 @@ export default function useForm(id?:string){
                 ...prev,
                 milestones:[
                     ...prev.milestones, 
-                    {  milestoneTitle:'', startDate:'',  endDate:'' },             
+                   { milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false }
                 ],
             }
         })

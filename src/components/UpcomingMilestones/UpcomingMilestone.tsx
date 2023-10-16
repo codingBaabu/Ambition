@@ -28,8 +28,8 @@ export default function UpcomingMilestone(){
                     startDate:milestone.startDate,
                     endDate:milestone.endDate,
                 }
-            })[0]
-          })
+            })
+          })[0]
     
           getMilestones.sort((a, b) => {
             const dateA = new Date(a.endDate);
@@ -38,9 +38,12 @@ export default function UpcomingMilestone(){
           })     
 
           setUpcomingMilestones(getMilestones);
-          if(viewId=='' || goalsLS.length===1){
+          if(getMilestones.length!==0 && 
+          (viewId=='' || goalsLS.length===1 || !getMilestones.find(id=>id==viewId)) ){
             setViewId(getMilestones[0].id)
           }
+
+          console.log(filteredGoals)
         
     }, [goalsLS]);
 
