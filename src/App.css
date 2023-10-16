@@ -1,0 +1,606 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    background:#222;
+    color:white;
+    font-family:Arial;
+    position:relative;
+    margin-bottom:9rem;
+    width:90%;
+    margin:auto;
+    scrollbar-color: hsl(120, 22%, 41%) #333;
+}
+
+.init-container {
+    position:relative;
+}
+
+.ambition-text {
+    font-family:'Trebuchet MS';
+    color:white;
+    font-size:5rem;
+}
+
+.container {
+    justify-content: center;
+}
+
+.container-inner {
+    display:flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ambition-bar {
+    display:flex;
+    align-items: center;
+    margin:2rem 1.5rem .5rem 1.5rem;
+}
+
+.ambition-bar label {
+    margin:0;
+    margin-right:1rem;
+}
+
+.ambition-bar progress[value]::-moz-progress-bar {
+    background-color: #517fff;
+}
+
+.completion-bar-container progress[value]::-moz-progress-bar {
+    background-color: #4caf50;
+}
+
+.completion-bar-container {
+    display:flex;
+    align-items: center;
+    flex-wrap:nowrap;
+    margin:0 1.5rem .5rem 1.5rem;
+}
+
+.completion-bar-container label {
+    white-space:nowrap;
+    margin:0;
+    margin-right:1rem;
+    gap:1rem;
+}
+
+progress {
+    height:.6rem;
+    width:100%;
+    border-radius:1rem;
+    border:none;
+}
+
+progress[value] {
+    background-color: #111;
+}
+
+.completion-bar {
+    gap:1rem;
+    margin:.25rem;
+}
+
+.ambition-bar progress[value] {
+    background-color: #112;
+}
+
+.completion-bar-container progress[value] {
+    background-color: #232;
+}
+
+.upcoming-milestones-and-preview {
+    display:grid;
+    grid-template-columns: 70% 1fr;
+    height:20rem;
+    gap:1rem;
+}
+
+.upcoming-milestones-and-title {
+    border-bottom:solid #333 3px;
+}
+
+.modal-outer {
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,.5);
+    width:100vw;
+    height:100vh;
+}
+
+.modal {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    position:fixed;
+    top:50vh;
+    left:50vw;
+    right:50vw;
+    bottom:50vh;
+    transform: translate(-50%, -50%);
+    width:35rem;
+    height:47rem;
+    background:hsla(0, 0%, 17%, .9);
+    border:solid hsl(120, 22%, 41%) 2px;
+}
+
+.inner-modal {
+    width:90%;
+}
+
+.modal-title {
+    font-family:'Trebuchet MS';
+}
+
+.goal-title {
+    margin:1rem 0;
+}
+
+.modal-submit {
+    width:100%;
+    height:4rem;
+    background-color: hsl(120, 22%, 41%);
+    border:none;
+    color:white;
+    font-size:1rem;
+}
+
+.modal-submit:hover {
+    cursor:pointer;
+}
+
+.modal-submit-wrapper {
+    display:flex;
+    justify-content:center;
+}
+
+.create-milestones-section {
+    justify-content: center;
+    width:100%;
+    height:25rem;
+    padding:1rem;
+    margin:1rem auto;
+    margin-bottom:1.5rem;
+    overflow:scroll;
+    scrollbar-color: white #333;
+    border:solid #bbb 2px;
+}
+
+.form-input {
+    font-family:lato;
+    height:2.5rem;
+    width:100%;
+    padding:0 .7rem;
+    background:#333;
+    color:white;
+    font-size:1rem;
+    border:none;
+}
+
+.description-field {
+    padding:.7rem .7rem;
+    height:5rem;
+    resize:none;
+}
+
+.title-field, .description-field {
+    border:solid #bbb 2px;
+}
+
+label {
+    margin:0;
+    padding:0;
+}
+
+.milestone-dates-wrapper {
+    display:flex;
+    justify-content: center;
+    margin-top:.5rem;
+    gap:.5rem;
+}
+
+.milestone-dates-section {
+    margin-bottom:.4rem;
+    text-align:center;
+    width:100%;
+    background:#333;
+    border:solid #bbb 2px;
+}
+
+.add-milestone-button {
+    width:2rem;
+    height:2rem;
+    background-color: #4caf50;
+    border:none;
+    color:white;
+    border-radius:50%;
+    margin:0 .5rem;
+}
+
+.milestone-wrapper {
+    width:80%;
+    margin:auto;
+    margin-bottom: 1.7rem;
+    background:hsl(120, 22%, 41%);
+    padding:1rem 1rem;
+    border-radius:1rem;
+}
+
+.date-input {
+    height:80%;
+    margin-bottom:.5rem;
+    border-radius:.3rem;
+    width:100%;
+    border:none;
+    background:#333;
+    color:white;
+    text-transform: uppercase;
+    padding:.3rem;
+}
+
+.remove-milestone-button-and-title {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom:.3rem;
+}
+
+.milestone-name-input {
+    width:88%;
+    padding:0 .7rem;
+    border:solid #bbb 2px;
+}
+
+.remove-milestone-container {
+    width:12%;
+    height:100%;
+    text-align: right;
+}
+
+.remove-milestone-button {
+    width:2rem;
+    height:2rem;
+    background-color: #af534c;
+    border:none;
+    color:white;
+    border-radius:50%;
+}
+
+.goals-title {
+    width:min-content;
+    margin-right:.25rem;
+}
+
+.goal-button {
+    text-align:center;
+    align-items:center;
+    height:2.5rem;
+    width:2.5rem;
+    font-size:1.5rem;
+    background:#333;
+    border-radius:50%;
+    border:solid aqua 1px;
+    color:aqua;
+}
+
+.goal-button:hover {
+    cursor:pointer;
+}
+
+.goals-inner-init {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    text-align:center;
+    transition:any 1s linear ;
+}
+
+.ambition-bg {
+    background-image: url('./ambition-bg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.goals-inner-init-items {
+    padding:5rem;
+    background:hsla(240, 100%, 0%, 0.75);
+    border-radius:1rem;
+  
+}
+
+.goal-button-init {
+    text-align:center;
+    align-items:center;
+    height:15rem;
+    width:15rem;
+    font-size:4rem;
+    background:hsla(0, 0%, 20%, .75);
+    border-radius:50%;
+    border:solid aqua 1px;
+    color:aqua;
+    margin:1rem;
+}
+
+.goal-button-init:hover {
+    cursor:pointer;
+    background:hsla(0, 0%, 25%, .75);
+    transform: scale(1.03);
+    transition: all .05s linear;
+
+}
+
+.goal-button-init:active {
+    transform: scale(1.00);
+    background:hsla(0, 0%, 20%, .75);
+}
+
+.goal-text-init {
+    font-family:'Trebuchet MS';
+    color:whitesmoke;
+    font-size:1.5rem;
+    border-radius: 1rem;
+    border-bottom:solid #667 3px;
+    padding:1rem;
+}
+
+.goals-inner {
+    display:flex;
+    align-items:center;
+}
+
+.goals-container {
+    align-items: center;
+    width:100%;
+}
+
+form {
+    margin:1rem;
+}
+
+input {
+    display:block;
+}
+
+.upcoming-section, .milestone-section {
+    display:flex;
+    flex-wrap: wrap;
+    height:min-content;
+}
+
+.upcoming-section {
+    height:15rem;
+    overflow-x:scroll;
+    flex-wrap:nowrap;
+}
+
+.milestone-section {
+    display:none;
+    margin-top:1rem;
+    width:min-content;
+}
+
+.visible {
+    display:flex;
+}
+
+.goal-milestones-container {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.upcoming-milestone-container {
+    margin:0 0 1.5rem 1.5rem;
+    background:hsl(120, 22%, 41%);
+    border-radius:.75rem;
+}
+
+.upcoming-milestone-content {   
+    padding:2rem;
+    padding-top:.5rem;
+}
+
+.upcoming-milestone {
+    background:hsl(120, 22%, 41%);
+    margin:0 0 1.5rem 1.5rem;
+    padding:2rem;
+    border-radius:.75rem;
+    width:min-content;
+}
+
+.view-goal-description {
+    margin-bottom:1rem;
+}
+
+.view-upcoming-milestone {
+    background:hsl(120, 22%, 41%);
+    margin:0 0 1.5rem 1.5rem;
+    padding:2rem;
+    border-radius:.75rem;
+    width:min-content;
+    height:13rem;
+}
+
+.milestone-selected {
+    border:solid hsl(120, 22%, 71%) 4px;
+}
+
+.upcoming-milestones-title, .goals-title {
+    padding:1rem;
+    font-size:2rem;
+}
+
+.upcoming-milestone:hover {
+    cursor:pointer;
+}
+
+.milestone-count-container {
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+    gap:.5rem;
+    margin-top:1rem;
+}
+
+.milestone-count {
+    width:3rem;
+}
+
+.milestone-count-container progress[value]::-moz-progress-bar {
+    background-color: hsl(120, 22%, 41%);
+}
+
+.checkbox-container {
+    display:flex;
+    justify-content:flex-end;
+}
+
+.empty-checkbox {
+    height: 1rem;
+    width: 1.5rem;
+    position: relative;
+ 
+}
+
+.empty-checkbox::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    background: #333; 
+    transform: translate(-.6rem, -.6rem);
+    border:solid hsl(120, 22%, 41%) .3rem;
+    border-radius:7px;
+}
+
+.clicked-checkbox {
+    display:flex;
+    height: 1rem;
+    width: 1.5rem;
+    position: relative; 
+    align-items:center;
+}
+
+.clicked-checkbox::before {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#333;
+    content: '★'; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    background: hsl(81, 94%, 55%); 
+    transform: translate(-.6rem, -.6rem);
+    border:solid hsl(120, 22%, 41%) .3rem;
+    border-radius:7px;
+}
+
+.view-top-section {
+
+}
+
+.view-goal-section {
+    background:hsl(120, 2%, 20%);
+    padding:1rem;
+    border-radius:.75rem;
+    border:solid hsl(120, 12%, 30%) 5px;
+    overflow:hidden;
+    overflow-x:scroll;
+    width:97%;
+}
+
+.view-goal-milestones {
+    display:flex;
+    height:100%;
+}
+
+
+
+.goal {
+    background:hsl(0, 0%, 18%);
+    border:solid hsl(0, 0%, 18%) 3px;
+    border-radius:.75rem;
+    margin:1rem;
+    padding:1rem;
+}
+
+.completed-goal {
+    border:solid hsl(120, 22%, 41%) 3px;
+}
+
+.goal-header {
+    display:flex;
+    justify-content:space-between;
+}
+
+.goal-title-and-edit {
+    display:flex;
+    align-items:center;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+}
+
+
+.edit-button {
+    margin-left:.5rem;
+    background:transparent;
+    color:white;
+    border:grey solid 1px;
+    padding:.2rem;
+    border-radius:.2rem;
+}
+
+.delete-container {
+    display:flex;
+    align-items:center;
+}
+
+.delete-button {
+    margin-left:.5rem;
+    background:transparent;
+    color:white;
+    border:none;
+    padding:.2rem;
+    border-radius:.2rem;
+    background:rgba(199, 61, 61, 0.74);
+    width:1.5rem;
+    height:1.5rem;
+}
+
+.delete-button:hover {
+    cursor:pointer;
+}
+
+.edit-button:hover {
+    cursor:pointer;
+}
+
+.goal:hover {
+    cursor:pointer;
+}
+
+@media (max-height:992px){
+    .create-milestones-section {
+        height:20rem;
+    }
+}
+
+@media (max-height:768px){
+    .create-milestones-section {
+        height:15rem;
+    }
+
+    .modal {
+        height:42rem;
+    }
+}
