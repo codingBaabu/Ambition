@@ -1,6 +1,7 @@
 import Modal from "../AddGoal/Modal"
 import { GoalContext } from '../../App';
 import {useContext, useState, useEffect} from 'react'
+import { getDateFormat } from "../../utils/utils";
 
 export default function Goal({ children }: GoalType ):JSX.Element {
     const {id, title, description, milestones} = children
@@ -35,8 +36,8 @@ export default function Goal({ children }: GoalType ):JSX.Element {
                             <h4>{milestone.milestoneTitle}</h4>
                             <h4>{milestone.checked}</h4>
                             
-                            <p>{milestone.startDate}</p>
-                            <p>{milestone.endDate}</p>
+                            <p>{getDateFormat(milestone.startDate)}</p>
+                            <p>{getDateFormat(milestone.endDate)}</p>
                         </div>
                     </div>
                 </div>

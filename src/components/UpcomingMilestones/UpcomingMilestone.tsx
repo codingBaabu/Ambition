@@ -1,5 +1,6 @@
 import {useState, useContext, useEffect} from 'react'
 import { GoalContext } from '../../App'
+import { getDateFormat } from "../../utils/utils";
 
 export default function UpcomingMilestone(){
     const [upcomingMilestones, setUpcomingMilestones] = useState([])
@@ -7,12 +8,16 @@ export default function UpcomingMilestone(){
     const [selected, setSelected] = useState('')
     let filteredGoals = []
     useEffect(() => {
-        filteredGoals = goalsLS.filter(goal => {
-            return goal.milestones.filter(milestone=>{
-                console.log('testing: '+isDateWithinAWeekFromToday(milestone.endDate))
+        filteredGoals = goalsLS.map(goal => {
+            
+            const filteredMilestones = goal.milestones.filter(milestone=>{
                 return isDateWithinAWeekFromToday(milestone.endDate)
             })
-        });
+
+            return filteredMilestones.length>0? 
+                { ...goal, milestones:filteredMilestones }:
+                null
+        }).filter(filteredGoalsWithNull=>filteredGoalsWithNull!=null)
 
         const getMilestones = filteredGoals.map(goal=>{
             return goal.milestones.map(milestone=>{
@@ -33,21 +38,17 @@ export default function UpcomingMilestone(){
           })     
 
           setUpcomingMilestones(getMilestones);
-          console.log('VIEW ID BEFORE: '+viewId)
           if(viewId=='' || goalsLS.length===1){
             setViewId(getMilestones[0].id)
-            console.log('VIEW ID AFTER: '+viewId)
           }
         
     }, [goalsLS]);
 
     function isDateWithinAWeekFromToday(targetDateString) {
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
             
         const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
         const targetDateObj = new Date(targetDateString); 
-        targetDateObj.setHours(0, 0, 0, 0);
           
         const diff = targetDateObj.getTime() - today.getTime();
           
@@ -60,8 +61,8 @@ export default function UpcomingMilestone(){
                 <div key={index} className={`upcoming-milestone ${viewId===milestone.id?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, e)}>
                     <h3>{milestone.milestoneTitle}</h3>
                     <p>{milestone.goalTitle}</p>
-                    <p>{milestone.startDate}</p>
-                    <p>{milestone.endDate}</p>
+                    <p>{getDateFormat(milestone.startDate)}</p>
+                    <p>{getDateFormat(milestone.endDate)}</p>
                 </div>
             )
       })

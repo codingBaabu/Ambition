@@ -79,10 +79,8 @@ function App() {
       updatedGoals[indexForGoal].milestones[milestoneIndex].feedAmbition=true
       const dd = JSON.parse(localStorage.getItem('doomsday'))
       if(dd && dd>new Date().getTime()){
-        console.log('existing')
         localStorage.setItem('doomsday', JSON.stringify(dd+10000))
       } else {
-        console.log('created')
         localStorage.setItem('doomsday', JSON.stringify(new Date().getTime()+10000))
       }
     }

@@ -12,7 +12,6 @@ export default function AmbitionBar(){
     useEffect(()=>{
         const interval = setInterval(()=>{  
             if(doomsDay - new Date().getTime() >= 0) {
-                console.log('DIFFERENCE - '+difference)
                 setDifference(doomsDay - new Date().getTime())
             } else {     
                 clearInterval(interval)
