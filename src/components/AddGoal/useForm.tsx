@@ -51,15 +51,17 @@ export default function useForm(id?:string){
     }
 
     function removeMilestone(index: number) {
-        setFormData((prev) => {
-          let updatedMilestones = [...prev.milestones]
-          updatedMilestones.splice(index, 1);  // This modifies updatedMilestones in place
-      
-          return {
-            ...prev,
-            milestones: updatedMilestones,
-          };
-        });
+        if(formData.milestones.length>1){
+            setFormData((prev) => {
+                let updatedMilestones = [...prev.milestones]
+                updatedMilestones.splice(index, 1);  
+            
+                return {
+                    ...prev,
+                    milestones: updatedMilestones,
+                };
+            });
+        }
     }
 
     return {
