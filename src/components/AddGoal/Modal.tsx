@@ -6,6 +6,7 @@ import Description from './Description'
 import useAddGoalToLocalStorage from './useAddGoalToLocalStorage'
 import { FormEvent, useContext } from 'react';
 import { goalFormType } from './useForm';
+import FocusLock from 'react-focus-lock';
 import { GoalContext } from '../../App'
 
 export default function Modal({ id }: showType ){
@@ -41,19 +42,21 @@ export default function Modal({ id }: showType ){
         <div className='modal-outer' onClick={(e)=>id?editToggle(id, e):toggle(e)}>
             <div className={'modal'} onClick={(e)=>e.stopPropagation()}>
                 <div className='inner-modal'>
-                    <form className='modal-form' onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
-                        <h1 className='modal-title'>{id?'Edit':'Create'} Goal</h1>
-                        <Title formChanged={formChanged} formData = {formData} />
-                        <Description formChanged={formChanged} formData = {formData} />
+                    <FocusLock>
+                        <form className='modal-form' onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
+                            <h1 className='modal-title'>{id?'Edit':'Create'} Goal</h1>
+                            <Title formChanged={formChanged} formData = {formData} />
+                            <Description formChanged={formChanged} formData = {formData} />
 
-                        <fieldset className='create-milestones-section'>
-                            <legend>Milestones<button name='add-milestone-button' className='add-milestone-button' type="button" onClick={()=>addMilestone()}>+</button></legend>
-                            {getMilestoneElements()}
-                        </fieldset>
-                        <div className='modal-submit-wrapper'>
-                            <button className='modal-submit'>{id?'Edit':'Create'}</button>                            
-                        </div>
-                    </form>
+                            <fieldset className='create-milestones-section'>
+                                <legend>Milestones<button name='add-milestone-button' className='add-milestone-button' type="button" onClick={()=>addMilestone()}>+</button></legend>
+                                {getMilestoneElements()}
+                            </fieldset>
+                            <div className='modal-submit-wrapper'>
+                                <button className='modal-submit'>{id?'Edit':'Create'}</button>                            
+                            </div>
+                        </form>
+                    </FocusLock>
                 </div>
             </div>
         </div>
