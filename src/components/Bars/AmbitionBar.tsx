@@ -1,5 +1,8 @@
 import {useState, useEffect, useRef} from 'react'
 import { completedMilestonesLength, completedMilestones } from './CompletedBar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import Tooltip from './ToolTip';
 
 export default function AmbitionBar(){
     const [doomsDay, setDoomsDay] = useState(
@@ -31,6 +34,11 @@ export default function AmbitionBar(){
             <div className='ambition-bar'>
                 <label htmlFor='completed'>Ambition: </label>
                 <progress id="completed" max={(1000*60*60*24*30)} value={difference?difference:0}></progress>
+
+                <div className='more-info-ambition'>
+                    <FontAwesomeIcon className='ambition-icon' icon={faCircleInfo} />
+                    <Tooltip />
+                </div>
             </div>
         </div>
     )

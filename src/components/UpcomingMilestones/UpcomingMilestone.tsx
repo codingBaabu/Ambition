@@ -87,7 +87,7 @@ export default function UpcomingMilestone(){
         <div className='upcoming-milestones-and-title'>
             <div className='filter-and-upcoming'>
                 <FontAwesomeIcon className='filter' icon={faFilter} onClick={()=>setMode(!mode)} />
-                <h2 className='upcoming-milestones-title'>{mode?'Upcoming Milestones (Week)':'Upcoming Milestones (All)'}</h2>
+                <h2 className='upcoming-milestones-title'>{mode?'Upcoming Milestones (This Week)':'Upcoming Milestones (All)'}</h2>
             </div>
 
             <div className='upcoming-section' >
