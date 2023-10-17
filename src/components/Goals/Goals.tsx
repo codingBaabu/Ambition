@@ -31,7 +31,7 @@ export default
                         {!isViewingInitModal && 
                             <div className='goals-inner-init-items'>
                                 <h1 className='ambition-text'>AMBITION</h1>
-                                <button className='goal-button-init' onClick={(e)=>toggle(e)}>+</button>
+                                <button className='goal-button-init' onClick={(e)=>toggle(e)}></button>
                                 <p className='goal-text-init'>KEEP THE FIRE LIT</p>
                             </div>
                         }

@@ -1,17 +1,24 @@
 import {useState, useContext, useEffect} from 'react'
 import { GoalContext } from '../../App'
 import { getDateFormat } from "../../utils/utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 export default function UpcomingMilestone(){
     const [upcomingMilestones, setUpcomingMilestones] = useState([])
     const {goalsLS, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId} = useContext(GoalContext)
     const [selected, setSelected] = useState('')
+    const modeLS = localStorage.getItem('mode')
+    const [mode, setMode] = useState(JSON.parse(modeLS)!=undefined?
+                                        JSON.parse(modeLS):
+                                        true)
     let filteredGoals = []
+
     useEffect(() => {
         filteredGoals = goalsLS.map(goal => {
             
             const filteredMilestones = goal.milestones.filter(milestone=>{
-                return isDateWithinAWeekFromToday(milestone.endDate)
+                return mode?isDateWithinAWeekFromToday(milestone.endDate):true
             })
 
             return filteredMilestones.length>0? 
@@ -45,7 +52,13 @@ export default function UpcomingMilestone(){
             setViewGoalId(getMilestones[0].id)
           }
         
-    }, [goalsLS]);
+    }, [goalsLS, mode]);
+
+        useEffect(()=>{
+            localStorage.setItem('mode', mode)            
+            console.log(localStorage.getItem('mode'))
+        }, [mode])
+
 
     function isDateWithinAWeekFromToday(targetDateString) {
         const today = new Date();
@@ -72,7 +85,11 @@ export default function UpcomingMilestone(){
       
     return (
         <div className='upcoming-milestones-and-title'>
-            <h2 className='upcoming-milestones-title'>Upcoming Milestones</h2>
+            <div className='filter-and-upcoming'>
+                <FontAwesomeIcon className='filter' icon={faFilter} onClick={()=>setMode(!mode)} />
+                <h2 className='upcoming-milestones-title'>{mode?'Upcoming Milestones (Week)':'Upcoming Milestones (All)'}</h2>
+            </div>
+
             <div className='upcoming-section' >
                 {milestoneElements}
             </div>

@@ -11,6 +11,7 @@ body {
     position:relative;
     margin-bottom:9rem;
     width:90%;
+    max-width:65rem;
     margin:auto;
     scrollbar-color: hsl(120, 22%, 41%) #333;
 }
@@ -101,6 +102,21 @@ progress[value] {
 
 .upcoming-milestones-and-title {
     border-bottom:solid #333 3px;
+}
+
+.filter {
+    color:hsl(224, 100%, 70%);
+}
+
+.filter-and-upcoming {
+    display:flex;
+    align-items: center;
+}
+
+.filter:hover {
+    cursor: pointer;
+    color:hsl(224, 100%, 80%);
+    transform:scale(1.1);
 }
 
 .modal-outer {
@@ -283,7 +299,7 @@ label {
     font-size:1.5rem;
     background:#333;
     border-radius:50%;
-    border:solid aqua 1px;
+    border:solid aqua .125rem;
     color:aqua;
 }
 
@@ -322,7 +338,7 @@ label {
     font-size:4rem;
     background:hsla(0, 0%, 20%, .75);
     border-radius:50%;
-    border:solid aqua 1px;
+    border:solid aqua .2rem;
     color:aqua;
     margin:1rem;
 }
