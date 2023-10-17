@@ -21,7 +21,8 @@ export default function App() {
   const [isViewingGoal, setIsViewingGoal] = useState<boolean>(false)
   const [isViewingInitModal, setIsViewingInitModal] = useState<boolean>(false)
   const [id, setId] = useState()
-  const [viewId, setViewId] = useState('')
+  const [viewGoalId, setViewGoalId] = useState('')
+  const [viewMilestoneId, setViewMilestoneId] = useState('')
 
   const [goals, setGoals] = useState<JSX.Element[]>([])
 
@@ -38,9 +39,10 @@ export default function App() {
   }
 
   
-  function viewToggle(id, e){
+  function viewToggle(id, milestoneId, e){
     setIsViewingGoal(prev=>!prev)
-    setViewId(id)
+    setViewGoalId(id)
+    setViewMilestoneId(milestoneId)
   }
 
   function deleteGoal(id, e){
@@ -74,7 +76,6 @@ export default function App() {
     })
 
     const checkedMilestone = updatedGoals[indexForGoal].milestones[milestoneIndex]
-
     checkedMilestone.checked = !checkedMilestone.checked
     
     if(!checkedMilestone.feedAmbition){
@@ -113,7 +114,7 @@ export default function App() {
     <GoalContext.Provider value=
       {{
         goalsLS, setGoalsLS, editToggle, isEditingGoal, 
-        toggle, viewToggle, viewId, setViewId, deleteGoal, toggleChecked, setId
+        toggle, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId, deleteGoal, toggleChecked, setId
       }}>
       
       <div className='container'>  
@@ -126,7 +127,7 @@ export default function App() {
             
             <div className='upcoming-milestones-and-preview'>
               <UpcomingMilestone/>
-              <ViewGoal id={viewId} goals = {goalsLS} />
+              <ViewGoal id={viewGoalId} goals = {goalsLS} />
             </div>
           </div>
         }

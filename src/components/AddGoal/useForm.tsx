@@ -6,7 +6,7 @@ export default function useForm(id?:string){
     const uuid = id?id:uuidv4()
     const emptyGoal = {
         id:uuid, title:'', description:'', milestones:[{
-            milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false
+            milestoneId:uuidv4(), milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false
         }]
     }
 
@@ -44,7 +44,7 @@ export default function useForm(id?:string){
                 ...prev,
                 milestones:[
                     ...prev.milestones, 
-                   { milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false }
+                   { milestoneId:uuidv4(), milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false }
                 ],
             }
         })

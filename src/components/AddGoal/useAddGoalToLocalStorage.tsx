@@ -14,18 +14,7 @@ export default function useAddGoalToLocalStorage(setFormData:SetFormDataType) {
 
     if (!goalsLS) {
       goals = JSON.stringify([goalArray]);
-      
-      //const today = new Date();
-      //const currentTime = today.getSeconds();
-      //const oneMinuteFromNow = new Date().setSeconds(today.getSeconds() + 60);
-      //const difference = oneMinuteFromNow - currentTime
-      //localStorage.setItem('doomsday', JSON.stringify(difference))
     } else {
-      //const today = new Date();
-      //const currentTime = today.getTime();
-      //const futureTime = currentTime + 120000
-      //localStorage.setItem('doomsday', JSON.stringify(futureTime))
-
       goals = JSON.parse(goalsLS);      
       const isEdited = goals.find(goal=>goal.id===goalArray.id)
 

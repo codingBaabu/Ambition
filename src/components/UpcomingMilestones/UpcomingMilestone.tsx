@@ -4,7 +4,7 @@ import { getDateFormat } from "../../utils/utils";
 
 export default function UpcomingMilestone(){
     const [upcomingMilestones, setUpcomingMilestones] = useState([])
-    const {goalsLS, viewToggle, viewId, setViewId} = useContext(GoalContext)
+    const {goalsLS, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId} = useContext(GoalContext)
     const [selected, setSelected] = useState('')
     let filteredGoals = []
     useEffect(() => {
@@ -23,13 +23,14 @@ export default function UpcomingMilestone(){
             return goal.milestones.map(milestone=>{
                 return {
                     id:goal.id,
+                    milestoneId:milestone.milestoneId,
                     milestoneTitle:milestone.milestoneTitle,
                     goalTitle:goal.title,
                     startDate:milestone.startDate,
                     endDate:milestone.endDate,
                 }
             })
-          })[0]
+          }).flat()
     
           getMilestones.sort((a, b) => {
             const dateA = new Date(a.endDate);
@@ -39,11 +40,10 @@ export default function UpcomingMilestone(){
 
           setUpcomingMilestones(getMilestones);
           if(getMilestones.length!==0 && 
-          (viewId=='' || goalsLS.length===1 || !getMilestones.find(id=>id==viewId)) ){
-            setViewId(getMilestones[0].id)
+          (viewGoalId=='' || goalsLS.length===1 || !getMilestones.find(id=>id==viewMilestoneId)) ){
+            setViewMilestoneId(getMilestones[0].milestoneId)
+            setViewGoalId(getMilestones[0].id)
           }
-
-          console.log(filteredGoals)
         
     }, [goalsLS]);
 
@@ -61,7 +61,7 @@ export default function UpcomingMilestone(){
       const milestoneElements = upcomingMilestones.map((milestone, index)=>{
       
         return (
-                <div key={index} className={`upcoming-milestone ${viewId===milestone.id?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, e)}>
+                <div key={index} className={`upcoming-milestone ${viewMilestoneId===milestone.milestoneId?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, milestone.milestoneId, e)}>
                     <h3>{milestone.milestoneTitle}</h3>
                     <p>{milestone.goalTitle}</p>
                     <p>{getDateFormat(milestone.startDate)}</p>
