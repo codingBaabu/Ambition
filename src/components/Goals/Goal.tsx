@@ -46,8 +46,8 @@ export default function Goal({ children }: GoalType ):JSX.Element {
     }
 
     function getMilestoneProgressBars(){
-        return milestonesCheckedValues.map(checked=>(
-                <progress className="milestone-count" max={1} value={checked?1:0}></progress>
+        return milestonesCheckedValues.map((checked, index)=>(
+                <progress key={index} className="milestone-count" max={1} value={checked?1:0}></progress>
         ))
     }
     

@@ -28,7 +28,7 @@ export default function CompletedBar(){
                 <label htmlFor='completed'>Completed: {completedMilestones.length+'/'+totalMilestones.length} </label>
                 {
                     totalMilestones.map((milestone, index) => (
-                        <progress className="completion-bar" max='1' value={completedMilestones[index]?'1':'0'}></progress>
+                        <progress key={index} className="completion-bar" max='1' value={completedMilestones[index]?'1':'0'}></progress>
                     ))
                 }
 
