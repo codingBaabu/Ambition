@@ -871,7 +871,7 @@ input {
 
 .goal {
     background:hsl(0, 0%, 18%);
-    border:solid hsl(0, 0%, 18%) 3px;
+    border:solid hsl(0, 0%, 18%) 5px;
     border-radius:.75rem;
     margin:1rem;
 }
@@ -896,7 +896,7 @@ input {
     justify-content:space-between;
     background:#222;
     padding:.5rem;
-    border-radius:1rem;
+    border-radius:.5rem;
 }
 
 .edit-button {
