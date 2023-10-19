@@ -8,7 +8,7 @@
 body {
     background:#222;
     color:white;
-    font-family:Arial;
+    font-family:Inter;
     position:relative;
     margin-bottom:9rem;
     width:90%;
@@ -67,7 +67,7 @@ body {
 .ambition-tool-tip {
     visibility: hidden;
     opacity:0;
-    width: 27.2rem; 
+    width: 27.5rem; 
     background-color: hsl(0, 0%, 18%);
     color: white;
 
@@ -93,7 +93,14 @@ body {
 }
 
 .ambition-tooltip-ul {
-    list-style:disc;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul.ambition-tooltip-ul > li {
+    padding-left: 24px; 
+    background: url('./blue-fire.png') no-repeat left center;
+    background-size: 14px 14px; 
 }
 
 .ambition-tooltip-title {
@@ -1028,8 +1035,9 @@ input {
 
 @media (max-width:768px){
     .ambition-tool-tip {
-        width:23rem;
-        margin-left:-23.5rem;
+        width:28rem;
+        margin-top:1rem;
+        margin-left:-25.5rem;
     }
 
     .upcoming-milestones-title {
