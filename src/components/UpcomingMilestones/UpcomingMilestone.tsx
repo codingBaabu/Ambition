@@ -1,6 +1,6 @@
 import {useState, useContext, useEffect} from 'react'
 import { GoalContext } from '../../App'
-import { getDateFormat } from "../../utils/utils";
+import { getMonthAndYear, getDate } from "../../utils/utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
@@ -72,14 +72,29 @@ export default function UpcomingMilestone(){
     }
     
       const milestoneElements = upcomingMilestones.map((milestone, index)=>{
-      
         return (
-                <div key={index} className={`upcoming-milestone ${viewMilestoneId===milestone.milestoneId?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, milestone.milestoneId, e)}>
-                    <h3>{milestone.milestoneTitle}</h3>
-                    <p>{milestone.goalTitle}</p>
-                    <p>{getDateFormat(milestone.startDate)}</p>
-                    <p>{getDateFormat(milestone.endDate)}</p>
+            <div key={index} className={`upcoming-milestone-container ${viewMilestoneId===milestone.milestoneId?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, milestone.milestoneId, e)}>
+
+               <div className="upcoming-milestone-content">
+                    <div className='goal-milestone-title-container upcoming-goal-milestone-title-container'>
+                        <h4 className='goal-milestone-title'>{milestone.milestoneTitle}</h4>
+                    </div>        
+                        
+                    <div className='goal-date-section'>
+                        <div className='goal-date-total'>
+                            <p className='goal-date-num'>{getDate(milestone.startDate)}</p>
+                            <p className='goal-date'>{getMonthAndYear(milestone.startDate)}</p>                                    
+                        </div>
+
+                        <p className='to-goals'>to</p>
+
+                        <div className='goal-date-total'>
+                            <p className='goal-date-num'>{getDate(milestone.endDate)}</p>
+                            <p className='goal-date'>{getMonthAndYear(milestone.endDate)}</p>                                    
+                        </div>
+                    </div>        
                 </div>
+            </div>
             )
       })
       
@@ -91,7 +106,9 @@ export default function UpcomingMilestone(){
             </div>
 
             <div className='upcoming-section' >
-                {milestoneElements}
+                <div className='upcoming-section-inner'>
+                    {milestoneElements}
+                </div>
             </div>
         </div>
     )

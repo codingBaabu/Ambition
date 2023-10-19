@@ -1,7 +1,7 @@
 import Modal from "../AddGoal/Modal"
 import { GoalContext } from '../../App';
 import {useContext, useState, useEffect} from 'react'
-import { getDateFormat } from "../../utils/utils";
+import { getMonthAndYear, getDate } from "../../utils/utils";
 
 export default function Goal({ children }: GoalType ):JSX.Element {
     const {id, title, description, milestones} = children
@@ -28,18 +28,30 @@ export default function Goal({ children }: GoalType ):JSX.Element {
         return milestones.map((milestone, index)=>{
             return (
                 <div key={index} className={`milestone-section ${visibleClass}`} onClick={(e)=>toggleChecked(id, index, e)}>
-                    <div key={index} className='upcoming-milestone-container'>
-                        <div className='checkbox-container' onClick={(e)=>e.stopPropagation()}>
+                        <div className='checkbox-container' onClick={(e)=>toggleChecked(id, index, e)}>
                             <div className={milestone.checked?`clicked-checkbox`:'empty-checkbox'}></div>
                         </div>
                         <div className="upcoming-milestone-content">
-                            <h4>{milestone.milestoneTitle}</h4>
+                            <div className='goal-milestone-title-container'>
+                                <h4 className='goal-milestone-title'>{milestone.milestoneTitle}</h4>
+                            </div>
+    
                             <h4>{milestone.checked}</h4>
                             
-                            <p>{getDateFormat(milestone.startDate)}</p>
-                            <p>{getDateFormat(milestone.endDate)}</p>
+                            <div className='goal-date-section'>
+                                <div className='goal-date-total'>
+                                    <p className='goal-date-num'>{getDate(milestone.startDate)}</p>
+                                    <p className='goal-date'>{getMonthAndYear(milestone.startDate)}</p>                                    
+                                </div>
+        
+                                <p className='to-goals'>to</p>
+    
+                                <div className='goal-date-total'>
+                                    <p className='goal-date-num'>{getDate(milestone.endDate)}</p>
+                                    <p className='goal-date'>{getMonthAndYear(milestone.endDate)}</p>                                    
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
             )
         })
@@ -54,24 +66,29 @@ export default function Goal({ children }: GoalType ):JSX.Element {
     return (
         <div className={`${isCompleted?'completed-goal':''} goal`} onClick={()=>toggleViewingMilestone()}>
             <div className='goal-header'>
-                <div className='goal-title-and-edit'>
-                    <h3>{title}</h3>
-                    <button className='edit-button' onClick={(e)=>{editToggle(id, e)}}>&#x270E;</button>     
-                </div>
-                <div className='delete-container'>
-                    <button className='delete-button' onClick={(e)=>{deleteGoal(id, e)}}>x</button>     
+        
+                <div className='goal-edit-and-delete'>
+                    <div className='edit-container'>
+                        <button className='edit-button' onClick={(e)=>{editToggle(id, e)}}>&#x270E;</button>     
+                    </div>
+                    <div className='delete-container'>
+                       <button className='delete-button' onClick={(e)=>{deleteGoal(id, e)}}>x</button>     
+                    </div>
+                    
                 </div>
            </div>
 
-           <p>{description}</p>
+           <div className='goal-content'>
+            <h3>{title} - <span className='goal-description'>{description}</span></h3>
 
-           <div className='milestone-count-container'>
-               {!viewingMilestone && getMilestoneProgressBars()}
-            </div>
+                <div className='milestone-count-container'>
+                    {!viewingMilestone && getMilestoneProgressBars()}
+                </div>
 
-           <div className='goal-milestones-container'>
-               {getMilestoneElements()}
-            </div>
+                <div className={`goal-milestones-container ${visibleClass?'add-top-margin-to-goal-milestones':''}`}>
+                    {getMilestoneElements()}
+                </div>
+           </div>          
         </div>
     )
 }

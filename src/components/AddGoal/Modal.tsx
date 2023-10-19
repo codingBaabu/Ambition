@@ -40,9 +40,13 @@ export default function Modal({ id }: showType ){
 
     return (
         <div className='modal-outer' onClick={(e)=>id?editToggle(id, e):toggle(e)}>
-            <div className={'modal'} onClick={(e)=>e.stopPropagation()}>
+            <div className={'modal'} onClick={(e)=>e.stopPropagation()}>                
                 <div className='inner-modal'>
                     <FocusLock>
+                        <div className='delete-container-modal'>
+                            <button className='delete-button-modal' onClick={(e)=>id?editToggle(id, e):toggle(e)}>x</button>     
+                        </div>
+
                         <form className='modal-form' onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
                             <h1 className='modal-title'>{id?'Edit':'Create'} Goal</h1>
                             <Title formChanged={formChanged} formData = {formData} />

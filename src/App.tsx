@@ -23,6 +23,8 @@ export default function App() {
   const [id, setId] = useState()
   const [viewGoalId, setViewGoalId] = useState('')
   const [viewMilestoneId, setViewMilestoneId] = useState('')
+  const isCollapsedLS = JSON.parse(localStorage.getItem('collapsed'))
+  const [isCollapsed, setIsCollapsed] = useState(isCollapsedLS?isCollapsedLS:false)
 
   const [goals, setGoals] = useState<JSX.Element[]>([])
 
@@ -100,6 +102,11 @@ export default function App() {
     setGoalsLS(parsed);
   }
 
+  function toggleIsCollapsed(){
+    localStorage.setItem('collapsed', !isCollapsed)
+    setIsCollapsed(!isCollapsed)
+  }
+
 
   useEffect(()=>{
     if(goalsLS!==null){
@@ -114,7 +121,7 @@ export default function App() {
     <GoalContext.Provider value=
       {{
         goalsLS, setGoalsLS, editToggle, isEditingGoal, 
-        toggle, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId, deleteGoal, toggleChecked, setId
+        toggle, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId, deleteGoal, toggleChecked, setId, isCollapsed, toggleIsCollapsed
       }}>
       
       <div className='container'>  
@@ -125,7 +132,7 @@ export default function App() {
                 <CompletedBar/>
               </div>
             
-            <div className='upcoming-milestones-and-preview'>
+            <div className={`upcoming-milestones-and-preview ${isCollapsed?'upcoming-milestones-full-width':'upcoming-milestones-reduced-width'}`}>
               <UpcomingMilestone/>
               <ViewGoal id={viewGoalId} goals = {goalsLS} />
             </div>
