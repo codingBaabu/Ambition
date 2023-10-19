@@ -192,7 +192,7 @@ progress[value] {
 }
 
 .upcoming-milestones-reduced-width {
-    grid-template-columns: 65% 1fr;
+    grid-template-columns: 1fr 19rem;
 }
 
 .upcoming-milestones-and-title {
@@ -635,7 +635,11 @@ input {
 
 .view-goal-title {
     text-align: center;
-}
+    background:#222;
+    padding:1.5rem;
+    border-radius:1rem;
+    border-top-left-radius:0;
+    border-top-right-radius:0;}
 
 .upcoming-milestone-content {   
     min-width:12rem;
@@ -828,9 +832,8 @@ input {
 }
 
 .view-top-section {
-    background:#222;
-    padding:1rem;
-    margin-bottom:2rem;
+    padding-bottom:0;
+    margin-bottom:.5rem;
 }
 
 .view-goal-sub-container {
@@ -1068,7 +1071,7 @@ input {
         flex-wrap:wrap;
         margin:auto;
         height:20rem;
-        background:#333;
+        background:hsl(0, 0%, 18%);
         padding:1rem 0;
         border-radius: .5rem;
         display:block;
