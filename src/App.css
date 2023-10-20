@@ -626,7 +626,6 @@ input {
     border-bottom-left-radius:1rem;
     border-bottom-right-radius:1rem;
     cursor:pointer;
-
 }
 
 .upcoming-milestone-container:hover {   
@@ -1125,10 +1124,7 @@ input {
     .create-milestones-section {
         height:20rem;
     }
-
-    .milestone-section {
-    }
-
+    
     .modal {
         height:42rem;
     }

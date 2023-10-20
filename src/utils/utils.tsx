@@ -1,5 +1,5 @@
 
-function getMonthAndYear(dateString){
+function getMonthAndYear(dateString:string){
     const months = [ 'Jan', 'Feb', 'Mar','April', 'May', 'Jun', 
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -10,7 +10,7 @@ function getMonthAndYear(dateString){
     return `${month} ${year}`
 }
 
-function getDate(dateString){
+function getDate(dateString:string){
     const fullDate = new Date(dateString)
     const date = fullDate.getDate()
     return date

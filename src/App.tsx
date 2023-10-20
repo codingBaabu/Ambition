@@ -18,44 +18,43 @@ export default function App() {
 
   const [isAddingGoal, setIsAddingGoal] = useState<boolean>(false)
   const [isEditingGoal, setIsEditingGoal] = useState<boolean>(false)
-  const [isViewingGoal, setIsViewingGoal] = useState<boolean>(false)
   const [isViewingInitModal, setIsViewingInitModal] = useState<boolean>(false)
-  const [id, setId] = useState()
+  const [id, setId] = useState<string>()
   const [viewGoalId, setViewGoalId] = useState('')
   const [viewMilestoneId, setViewMilestoneId] = useState('')
-  const isCollapsedLS = JSON.parse(localStorage.getItem('collapsed'))
+  const isCollapsedStringLS = localStorage.getItem('collapsed')
+  const isCollapsedLS = isCollapsedStringLS?JSON.parse(isCollapsedStringLS):null
   const [isCollapsed, setIsCollapsed] = useState(isCollapsedLS?isCollapsedLS:false)
 
   const [goals, setGoals] = useState<JSX.Element[]>([])
 
-  function toggle(e){
+  function toggle(e:React.SyntheticEvent){
     e.stopPropagation()
     setIsAddingGoal(prev=>!prev)
     setIsViewingInitModal(prev=>!prev)
   }
 
-  function editToggle(id, e){
+  function editToggle(id:string, e:React.SyntheticEvent){
     e.stopPropagation()
     setIsEditingGoal(prev=>!prev)
     setId(id)
   }
 
   
-  function viewToggle(id, milestoneId, e){
-    setIsViewingGoal(prev=>!prev)
+  function viewToggle(id:string, milestoneId:string){
     setViewGoalId(id)
     setViewMilestoneId(milestoneId)
   }
 
-  function deleteGoal(id, e){
+  function deleteGoal(id:string, e:React.SyntheticEvent){
     e.stopPropagation()
-    const updatedGoals = goalsLS
+    const updatedGoals = goalsLS?goalsLS:[]
     
-    updatedGoals.forEach((goal, index)=>{
-      if(goal.id==id){
-        updatedGoals.splice(index, 1)
-      }
-    })
+      updatedGoals.forEach((goal, index)=>{
+        if(goal.id==id){
+          updatedGoals.splice(index, 1)
+        }
+      })  
 
     const updatedGoalStringified = JSON.stringify(updatedGoals)
 
@@ -66,23 +65,24 @@ export default function App() {
     setGoalsLS(parsed);
   }
 
-  function toggleChecked(id, milestoneIndex, e){
+  function toggleChecked(id:string, milestoneIndex:number, e:React.SyntheticEvent){
     e.stopPropagation()
-    const updatedGoals = goalsLS
-    let indexForGoal
+    const updatedGoals = goalsLS?goalsLS:[]
+    let indexForGoal = -1
 
     updatedGoals.forEach((goal, index)=>{
       if(goal.id==id){
         indexForGoal = index    
       }
-    })
+    })  
 
     const checkedMilestone = updatedGoals[indexForGoal].milestones[milestoneIndex]
     checkedMilestone.checked = !checkedMilestone.checked
     
     if(!checkedMilestone.feedAmbition){
       checkedMilestone.feedAmbition=true
-      const dd = JSON.parse(localStorage.getItem('doomsday'))
+      const ddString = localStorage.getItem('doomsday')
+      const dd = ddString?JSON.parse(ddString):''
       const maxTime = (1000*60*60*24*30)
       let extraTime =  (1000*60*60*24*3)
       extraTime = dd-new Date().getTime()>maxTime?0:extraTime
@@ -103,7 +103,7 @@ export default function App() {
   }
 
   function toggleIsCollapsed(){
-    localStorage.setItem('collapsed', !isCollapsed)
+    localStorage.setItem('collapsed', JSON.stringify(!isCollapsed))
     setIsCollapsed(!isCollapsed)
   }
 
@@ -140,7 +140,7 @@ export default function App() {
         }
 
         <div className='container-inner'>
-          <Goals toggle={toggle} setIsAddingGoal={setIsAddingGoal} isViewingInitModal={isViewingInitModal} hideButton={setIsViewingInitModal}>
+          <Goals toggle={toggle} isViewingInitModal={isViewingInitModal}>
               {goalsLS && goals}
           </Goals>
 

@@ -2,17 +2,25 @@ import { formChangedType } from "./useForm"
 
 export default function Milestones({ 
         formChanged, removeMilestone, milestone, index, isPredated 
-    } :any ){
+    }:Milestones ){
 
         return (
         <div className='milestone-wrapper'>
                 <div className='remove-milestone-button-and-title'>
-                    <input type='text' className='form-input milestone-name-input' placeholder='Name' name='milestoneTitle'
-                        value={milestone.milestoneTitle} onChange={(e)=>formChanged(e, index)}
-                        required
+                    <input  type='text' 
+                            className='form-input milestone-name-input' 
+                            placeholder='Name' 
+                            name='milestoneTitle'
+                            value={milestone.milestoneTitle} 
+                            onChange={(e)=>formChanged(e, index)}
+                            required
                     />
                     <div className='remove-milestone-container'>
-                        <button className='remove-milestone-button' type="button" onClick={()=>removeMilestone(index)}>x</button>
+                        <button className='remove-milestone-button' 
+                                type="button" 
+                                onClick={()=>removeMilestone(index)}>
+                                    x
+                        </button>
                     </div>
                 </div>
 
@@ -41,11 +49,16 @@ export default function Milestones({
 }
 
 type Milestones = {
-    children:{
+    formChanged:formChangedType,
+    removeMilestone:(index:number)=>void,
+    milestone:{
+        milestoneId:string,
         milestoneTitle:string,
         startDate:string,
-        endDate:string,   
-    }[],
-    formChanged:formChangedType,
-    removeMilestone:(index:number)=>void
+        endDate:string,     
+        feedAmbition:boolean,
+        checked:boolean
+    },
+    index:number,
+    isPredated:boolean
 }

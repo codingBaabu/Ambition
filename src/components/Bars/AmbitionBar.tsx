@@ -1,16 +1,14 @@
-import {useState, useEffect, useRef} from 'react'
-import { completedMilestonesLength, completedMilestones } from './CompletedBar'
+import { useState, useEffect } from 'react'
+import { completedMilestones } from './CompletedBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Tooltip from './ToolTip';
 
 export default function AmbitionBar(){
     const [doomsDay, setDoomsDay] = useState(
-        JSON.parse(localStorage.getItem('doomsday'))
-    )
+        JSON.parse(localStorage.getItem('doomsday') as unknown as string))
 
     const [difference, setDifference] = useState(1000)
-    const [out, setOut] = useState(false)
 
     useEffect(()=>{
         const interval = setInterval(()=>{  
@@ -18,7 +16,6 @@ export default function AmbitionBar(){
                 setDifference(doomsDay - new Date().getTime())
             } else {     
                 clearInterval(interval)
-                setOut(true)
             }
         }, 1000)
 
@@ -26,7 +23,7 @@ export default function AmbitionBar(){
     }, [doomsDay])
 
     useEffect(()=>{
-        setDoomsDay(JSON.parse(localStorage.getItem('doomsday')))
+        setDoomsDay(JSON.parse(localStorage.getItem('doomsday') as unknown as string))
     }, [completedMilestones])
 
     return (

@@ -4,7 +4,7 @@ import { GoalContext } from '../../App';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function useAddGoalToLocalStorage(setFormData:SetFormDataType) {
-  const { setGoalsLS, setId, goalsLS }:any = useContext(GoalContext);
+  const { setGoalsLS } = useContext<GoalContextType>(GoalContext);
 
   return (e: FormEvent<HTMLFormElement>, goalArray: goalFormType) => {
     e.preventDefault();
@@ -16,9 +16,9 @@ export default function useAddGoalToLocalStorage(setFormData:SetFormDataType) {
       goals = JSON.stringify([goalArray]);
     } else {
       goals = JSON.parse(goalsLS);      
-      const isEdited = goals.find(goal=>goal.id===goalArray.id)
+      const isEdited = goals.find((goal:goalFormType)=>goal.id===goalArray.id)
 
-      goals.forEach((goal, index)=>{
+      goals.forEach((goal:goalFormType, index:number)=>{
         if(goal.id===goalArray.id){
           goals[index] = goalArray
         } 
@@ -41,9 +41,11 @@ export default function useAddGoalToLocalStorage(setFormData:SetFormDataType) {
       title:'',
       description:'',
       milestones:[{
+          milestoneId:'',
           milestoneTitle:'',
           startDate:'',
           endDate:'',
+          feedAmbition:false,
           checked:false
       }]
   })
@@ -51,3 +53,6 @@ export default function useAddGoalToLocalStorage(setFormData:SetFormDataType) {
 }
 
 type SetFormDataType = Dispatch<SetStateAction<goalFormType>>
+type GoalContextType = {
+  setGoalsLS:(arr:goalFormType[])=>void
+}

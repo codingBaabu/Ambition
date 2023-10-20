@@ -4,9 +4,14 @@ import { v4 as uuidv4 } from 'uuid'
 
 export default function useForm(id?:string){
     const uuid = id?id:uuidv4()
-    const emptyGoal = {
+    const emptyGoal:goalFormType = {
         id:uuid, title:'', description:'', milestones:[{
-            milestoneId:uuidv4(), milestoneTitle:'', feedAmbition:false, startDate:'', endDate:'', checked:false
+            milestoneId:uuidv4(), 
+            milestoneTitle:'', 
+            feedAmbition:false, 
+            startDate:'', 
+            endDate:'', 
+            checked:false
         }]
     }
 
@@ -14,10 +19,11 @@ export default function useForm(id?:string){
     const [formData, setFormData] = useState<goalFormType>(formObject)
 
     function getExistingGoal(){
-        const goals = localStorage.getItem('goals')
-        const goalsParsed = JSON.parse(goals)
-        return goalsParsed.find(goal=>goal.id===id
-        )
+        const goals:string | null = localStorage.getItem('goals')
+        const goalsParsed:goalFormType[] | null = goals?JSON.parse(goals):null
+        const existingGoal = goalsParsed?goalsParsed.find(goal=>goal.id===id):null
+
+        return existingGoal?existingGoal:emptyGoal
     }
 
     const formChanged:formChangedType = (e, milestoneIndex)=>{
@@ -78,14 +84,17 @@ type goalFormType = {
     title:string,
     description:string,
     milestones:{
+        milestoneId:string,
         milestoneTitle:string,
         startDate:string,
-        endDate:string,        
+        endDate:string,     
+        feedAmbition:boolean,
+        checked:boolean
     }[]
 }
 
 type formChangedType = 
-    (e: ChangeEvent<HTMLInputElement>, milestoneIndex?: number) => void
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, milestoneIndex?: number) => void
 
 
 export type {

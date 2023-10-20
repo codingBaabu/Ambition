@@ -1,17 +1,35 @@
-import {useState, useContext, useEffect} from 'react'
+import {useState, useContext, useEffect } from 'react'
 import { GoalContext } from '../../App'
 import { getMonthAndYear, getDate } from "../../utils/utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { goalFormType } from '../AddGoal/useForm';
+
+type GoalContextProps = {
+    goalsLS:goalFormType[],
+    viewToggle:(goalID:string, milestoneID:string, e:React.MouseEvent<HTMLButtonElement | HTMLDivElement>)=>void,
+    viewGoalId:string,
+    setViewGoalId:(newId:string)=>void,
+    viewMilestoneId:string,
+    setViewMilestoneId:(newId:string)=>void
+}
+
+type milestone = {
+    id:string,
+    milestoneId:string,
+    milestoneTitle:string,
+    goalTitle:string,
+    startDate:string,
+    endDate:string,
+} | null
 
 export default function UpcomingMilestone(){
-    const [upcomingMilestones, setUpcomingMilestones] = useState([])
-    const {goalsLS, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId} = useContext(GoalContext)
-    const [selected, setSelected] = useState('')
-    const modeLS = localStorage.getItem('mode')
-    const [mode, setMode] = useState(JSON.parse(modeLS)!=undefined?
-                                        JSON.parse(modeLS):
-                                        true)
+    const [upcomingMilestones, setUpcomingMilestones] = useState<milestone[]>([])
+    const {goalsLS, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId}:GoalContextProps = useContext(GoalContext)
+    const modeLS:string | null = localStorage.getItem('mode')
+    const [mode, setMode] = useState( modeLS != undefined?
+                                                JSON.parse(modeLS):
+                                                true)
     let filteredGoals = []
 
     useEffect(() => {
@@ -26,8 +44,8 @@ export default function UpcomingMilestone(){
                 null
         }).filter(filteredGoalsWithNull=>filteredGoalsWithNull!=null)
 
-        const getMilestones = filteredGoals.map(goal=>{
-            return goal.milestones.map(milestone=>{
+        const getMilestones:milestone[]|milestone = filteredGoals.map((goal:goalFormType|null)=>{
+            return goal!==null? goal.milestones.map(milestone=>{
                 return {
                     id:goal.id,
                     milestoneId:milestone.milestoneId,
@@ -36,20 +54,27 @@ export default function UpcomingMilestone(){
                     startDate:milestone.startDate,
                     endDate:milestone.endDate,
                 }
-            })
+            }):null
           }).flat()
     
-          getMilestones.sort((a, b) => {
+          getMilestones.sort((a:milestone, b:milestone) => {
+            if(a===null || b === null){
+                return 0
+            }
             const dateA = new Date(a.endDate);
             const dateB = new Date(b.endDate);
-            return dateA - dateB;
+            return dateA.getTime() - dateB.getTime();
           })     
 
           setUpcomingMilestones(getMilestones);
-          if(getMilestones.length!==0 && 
-          (viewGoalId=='' || goalsLS.length===1 || !getMilestones.find(id=>id==viewMilestoneId)) ){
-            setViewMilestoneId(getMilestones[0].milestoneId)
-            setViewGoalId(getMilestones[0].id)
+          if(   getMilestones.length!==0 && 
+            (   viewGoalId=='' || 
+                goalsLS.length===1 || 
+                !getMilestones.find((milestone:milestone) => 
+                    milestone?milestone.id==viewMilestoneId:null)) 
+            ){
+                setViewMilestoneId(getMilestones[0]?getMilestones[0].milestoneId:'')
+                setViewGoalId(getMilestones[0]?getMilestones[0].id:'')
           }
         
     }, [goalsLS, mode]);
@@ -60,7 +85,7 @@ export default function UpcomingMilestone(){
         }, [mode])
 
 
-    function isDateWithinAWeekFromToday(targetDateString) {
+    function isDateWithinAWeekFromToday(targetDateString:string) {
         const today = new Date();
             
         const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
@@ -72,31 +97,39 @@ export default function UpcomingMilestone(){
     }
     
       const milestoneElements = upcomingMilestones.map((milestone, index)=>{
-        return (
-            <div key={index} className={`upcoming-milestone-container ${viewMilestoneId===milestone.milestoneId?'milestone-selected':''}`} onClick={(e)=>viewToggle(milestone.id, milestone.milestoneId, e)}>
+        if(milestone!=null){
+            return (
+                <div key={index} 
+                    className={`upcoming-milestone-container 
+                                ${viewMilestoneId===milestone.milestoneId?
+                                  'milestone-selected':''}`} 
+                    onClick={(e)=>viewToggle(milestone.id, milestone.milestoneId, e)}>
 
-               <div className="upcoming-milestone-content">
-                    <div className='goal-milestone-title-container upcoming-goal-milestone-title-container'>
-                        <h4 className='goal-milestone-title'>{milestone.milestoneTitle}</h4>
-                    </div>        
-                        
-                    <div className='goal-date-section'>
-                        <div className='goal-date-total'>
-                            <p className='goal-date-num'>{getDate(milestone.startDate)}</p>
-                            <p className='goal-date'>{getMonthAndYear(milestone.startDate)}</p>                                    
-                        </div>
+                <div className="upcoming-milestone-content">
+                        <div className='goal-milestone-title-container upcoming-goal-milestone-title-container'>
+                            <h4 className='goal-milestone-title'>{milestone.milestoneTitle}</h4>
+                        </div>        
+                            
+                        <div className='goal-date-section'>
+                            <div className='goal-date-total'>
+                                <p className='goal-date-num'>{getDate(milestone.startDate)}</p>
+                                <p className='goal-date'>{getMonthAndYear(milestone.startDate)}</p>                                    
+                            </div>
 
-                        <p className='to-goals'>to</p>
+                            <p className='to-goals'>to</p>
 
-                        <div className='goal-date-total'>
-                            <p className='goal-date-num'>{getDate(milestone.endDate)}</p>
-                            <p className='goal-date'>{getMonthAndYear(milestone.endDate)}</p>                                    
-                        </div>
-                    </div>        
+                            <div className='goal-date-total'>
+                                <p className='goal-date-num'>{getDate(milestone.endDate)}</p>
+                                <p className='goal-date'>{getMonthAndYear(milestone.endDate)}</p>                                    
+                            </div>
+                        </div>        
+                    </div>
                 </div>
-            </div>
-            )
-      })
+                )
+            }
+        }
+
+      )
       
     return (
         <div className='upcoming-milestones-and-title'>

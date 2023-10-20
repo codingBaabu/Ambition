@@ -11,7 +11,7 @@ import { GoalContext } from '../../App'
 
 export default function Modal({ id }: showType ){
     const {formData, formChanged, addMilestone, removeMilestone, setFormData} = useForm(id)
-    const {toggle, editToggle} = useContext(GoalContext)
+    const {toggle, editToggle} = useContext<GoalContextType>(GoalContext)
     const formSubmitted = useAddGoalToLocalStorage(setFormData)
     let isSubmittable = false
 
@@ -44,20 +44,49 @@ export default function Modal({ id }: showType ){
                 <div className='inner-modal'>
                     <FocusLock>
                         <div className='delete-container-modal'>
-                            <button className='delete-button-modal' onClick={(e)=>id?editToggle(id, e):toggle(e)}>x</button>     
+                            <button 
+                                className='delete-button-modal' 
+                                onClick={(e)=>id?editToggle(id, e):toggle(e)}>
+                                    x
+                            </button>     
                         </div>
 
-                        <form className='modal-form' onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
-                            <h1 className='modal-title'>{id?'Edit':'Create'} Goal</h1>
-                            <Title formChanged={formChanged} formData = {formData} />
-                            <Description formChanged={formChanged} formData = {formData} />
+                        <form 
+                            className='modal-form' 
+                            onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
+                            <h1 
+                                className='modal-title'>{id?'Edit':'Create'} 
+                                    Goal
+                            </h1>
+                            <Title 
+                                formChanged={formChanged} 
+                                formData = {formData} 
+                            />
+                            <Description 
+                                formChanged={formChanged} 
+                                formData = {formData} 
+                            />
 
-                            <fieldset className='create-milestones-section'>
-                                <legend>Milestones<button name='add-milestone-button' className='add-milestone-button' type="button" onClick={()=>addMilestone()}>+</button></legend>
+                            <fieldset 
+                                className='create-milestones-section'>
+                                <legend>
+                                    Milestones
+                                    <button 
+                                        name='add-milestone-button' 
+                                        className='add-milestone-button' 
+                                        type="button" 
+                                        onClick={()=>addMilestone()}>
+                                            +
+                                    </button>
+                                </legend>
                                 {getMilestoneElements()}
                             </fieldset>
-                            <div className='modal-submit-wrapper'>
-                                <button className='modal-submit'>{id?'Edit':'Create'}</button>                            
+                            <div 
+                                className='modal-submit-wrapper'>
+                                <button 
+                                    className='modal-submit'>
+                                        {id?'Edit':'Create'}
+                                </button>                            
                             </div>
                         </form>
                     </FocusLock>
@@ -69,4 +98,16 @@ export default function Modal({ id }: showType ){
 
 type showType = { 
     id?:string 
+}
+
+type GoalContextType = {
+    toggle:(
+        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+                React.FormEvent<HTMLFormElement>
+            ) => void,
+    editToggle:(
+        id:string, 
+        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+                React.FormEvent<HTMLFormElement>
+            ) => void
 }

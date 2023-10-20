@@ -1,23 +1,36 @@
-import Modal from "../AddGoal/Modal"
 import { GoalContext } from '../../App';
 import {useContext, useState, useEffect} from 'react'
 import { getMonthAndYear, getDate } from "../../utils/utils";
+import { goalFormType } from "../AddGoal/useForm";
 
-export default function Goal({ children }: GoalType ):JSX.Element {
+type GoalContextType = {
+    toggle:(
+        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+                React.FormEvent<HTMLFormElement>
+            ) => void,
+    editToggle:(
+        id:string, 
+        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+                React.FormEvent<HTMLFormElement>
+            ) => void,
+    deleteGoal:(id:string, e:React.MouseEvent<HTMLButtonElement>)=>void
+    toggleChecked:(id:string, index:number, e:React.MouseEvent<HTMLDivElement>)=>void
+}
+
+
+export default function Goal({ children }: {children:goalFormType} ):JSX.Element {
     const {id, title, description, milestones} = children
-    const {isEditingGoal, editToggle, deleteGoal, toggleChecked} = useContext(GoalContext)
-    const [goalCompleted, setGoalCompleted] = useState([])
+    const {editToggle, deleteGoal, toggleChecked}:GoalContextType = useContext(GoalContext)
     const [viewingMilestone, setViewingMilestone] = useState(false)
     const [isCompleted, setIsCompleted] = useState(false)
     const visibleClass = viewingMilestone?'visible':''
     
     const milestonesCompletedArr = milestones.map(milestone=>milestone.checked)
-    const totalMilestones = milestonesCompletedArr.length
     const milestonesCheckedValues = milestones.map(milestone=>milestone.checked)
-    const completedMilestones = milestonesCompletedArr.filter(milestone=>milestone===true).length
+    const completedMilestones = milestonesCompletedArr.filter(milestone=>milestone).length
 
     useEffect(()=>{
-        setIsCompleted(milestonesCheckedValues.every(status => status === true));
+        setIsCompleted(milestonesCheckedValues.every(status => status));
     }, [completedMilestones])
 
     function toggleViewingMilestone(){
@@ -91,16 +104,4 @@ export default function Goal({ children }: GoalType ):JSX.Element {
            </div>          
         </div>
     )
-}
-
-type GoalType = {
-    children:{
-        title:string,
-        description:string,
-        milestones:{
-            milestoneTitle:string,
-            startDate:string,
-            endDate:string,        
-        }[]
-    }
 }

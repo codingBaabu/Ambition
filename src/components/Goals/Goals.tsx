@@ -1,14 +1,19 @@
 import {ReactNode, useContext, useEffect} from 'react'
 import { GoalContext } from '../../App'
+import { goalFormType } from '../AddGoal/useForm'
 
 type GoalProps = {
     children:ReactNode,
-    toggle:()=>void
+    toggle:(e:React.MouseEvent<HTMLButtonElement>)=>void,
+    isViewingInitModal:boolean
 }
 
 export default 
-    function Goals( {children, toggle, setIsAddingGoal, isViewingInitModal, setIsViewingInitModal} : GoalProps ) : JSX.Element {
-        const {goalsLS} = useContext(GoalContext)
+    function Goals( 
+        {children, toggle, isViewingInitModal} : GoalProps ) 
+            : JSX.Element {
+                
+            const {goalsLS}:{goalsLS:goalFormType[]} = useContext(GoalContext)
 
             useEffect(()=>{
                 !goalsLS || (goalsLS && goalsLS.length <=0)?
