@@ -1,0 +1,1131 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    transition:all .2s;
+}
+
+body {
+    background:#222;
+    color:white;
+    font-family:Inter;
+    position:relative;
+    margin-bottom:9rem;
+    width:90%;
+    max-width:75rem;
+    margin:auto;
+    scrollbar-color: hsl(120, 22%, 41%) #333;
+}
+
+.init-container {
+    position:relative;
+}
+
+.ambition-text {
+    font-family:'Trebuchet MS';
+    color:white;
+    font-size:5rem;
+}
+
+.container {
+    justify-content: center;
+}
+
+.container-inner {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.goal-inner {
+    align-items:center;
+}
+
+.ambition-bar {
+    display:flex;
+    align-items: center;
+    margin:2rem 1.5rem .5rem 1.5rem;
+}
+
+.more-info-ambition {
+  
+    margin-left:1rem;
+    color:#517fff;
+    border-radius:100%;
+    font-size:1.2rem;
+    position:relative;
+    cursor:pointer;
+} 
+
+.ambition-icon {
+    background:white;
+    color:#517fff;
+    border-radius:100%;
+}
+
+.ambition-tool-tip {
+    visibility: hidden;
+    opacity:0;
+    width: 27.5rem; 
+    background-color: hsl(0, 0%, 18%);
+    color: white;
+
+    position: absolute;
+    left: 50%;
+    top: 0; 
+    margin-left: -28rem; 
+    transition: opacity 0.3s;
+    border:solid #3e7fd4 .1rem;
+    z-index:5;
+    box-shadow: 10px 10px 16px 5px #222;
+}
+
+.ambition-tooltip-title-container {
+    padding:1rem 2rem;
+    background:#222;
+   
+}
+
+.ambition-tooltip-text-container {
+    padding:2rem 3rem;
+    line-height: 1.5rem;
+}
+
+.ambition-tooltip-ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul.ambition-tooltip-ul > li {
+    padding-left: 24px; 
+    background: url('./blue-fire.png') no-repeat left center;
+    background-size: 14px 14px; 
+}
+
+.ambition-tooltip-title {
+    font-size:1.5rem;
+    font-family:'Trebuchet MS';
+    width:100%;
+    font-size:1.6rem;
+}
+
+.tagline {
+    font-size:1.2rem;
+}
+
+.ambition-tooltip-text {
+    font-size:1rem;
+}
+
+.ambition-tooltip-image {
+    margin:1rem 0;
+    border-radius:.5rem;
+}
+
+.more-info-ambition:hover .ambition-tool-tip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.ambition-bar label {
+    margin:0;
+    margin-right:1rem;
+}
+
+.ambition-bar progress[value]::-moz-progress-bar {
+    background-color: #517fff;
+}
+
+.completion-bar-container progress[value]::-moz-progress-bar {
+    background-color: #4caf50;
+}
+
+.completion-bar-container {
+    display:flex;
+    align-items: center;
+    flex-wrap:nowrap;
+    margin:0 1.5rem .5rem 1.5rem;
+}
+
+.completion-bar-container label {
+    white-space:nowrap;
+    margin:0;
+    margin-right:1rem;
+    gap:1rem;
+}
+
+progress {
+    height:.6rem;
+    width:100%;
+    border-radius:1rem;
+    border:none;
+}
+
+progress[value] {
+    background-color: #111;
+}
+
+.completion-bar {
+    gap:1rem;
+    margin:.25rem;
+}
+
+.ambition-bar progress[value] {
+    background-color: #112;
+}
+
+.completion-bar-container progress[value] {
+    background-color: #232;
+}
+
+.upcoming-milestones-and-preview {
+    display:grid;
+    grid-template-columns: 65% 1fr;
+    height:25rem;
+    gap:1rem;
+    margin-top:2rem;
+}
+
+.upcoming-milestones-full-width {
+    grid-template-columns: 95% 1fr;
+}
+
+.upcoming-milestones-reduced-width {
+    grid-template-columns: 1fr 19rem;
+}
+
+.upcoming-milestones-and-title {
+    border-bottom:solid #333 3px;
+    align-items: center;
+    position:relative;
+}
+
+.filter {
+    color:hsl(224, 100%, 70%);
+}
+
+.filter-and-upcoming {
+    display:flex;
+    align-items: center;
+    height:min-content;
+    position:relative;
+    z-index:1;
+}
+
+.filter:hover {
+    cursor: pointer;
+    color:hsl(224, 100%, 80%);
+    transform:scale(1.1);
+}
+
+.filter:active {
+    color:hsl(224, 100%, 70%);
+    transform:scale(1);
+}
+
+.modal-outer {
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,.8);
+    width:100vw;
+    height:100vh;
+    z-index:2;
+}
+
+.modal {
+    display:flex;
+    justify-content: center;
+    flex-wrap:wrap;
+    align-items:center;
+    position:fixed;
+    top:50vh;
+    left:50vw;
+    right:50vw;
+    bottom:50vh;
+    transform: translate(-50%, -50%);
+    width:35rem;
+    height:47rem;
+    background:hsla(0, 0%, 17%, .9);
+    border:solid hsl(120, 22%, 41%) 2px;
+}
+
+.inner-modal {
+    width:90%;
+}
+
+.modal-title {
+    font-family:'Trebuchet MS';
+}
+
+.goal-title {
+    margin:1rem 0;
+}
+
+.goal-description {
+    font-weight:100;
+    font-size:1rem;
+}
+
+.modal-submit {
+    width:100%;
+    height:4rem;
+    background-color: hsl(120, 22%, 41%);
+    border:none;
+    color:white;
+    font-size:1rem;
+}
+
+.modal-submit:hover {
+    cursor:pointer;
+    background-color: hsl(120, 22%, 45%);
+}
+
+.modal-submit-wrapper {
+    display:flex;
+    justify-content:center;
+}
+
+.create-milestones-section {
+    justify-content: center;
+    width:100%;
+    height:25rem;
+    padding:1rem;
+    margin:1rem auto;
+    margin-bottom:1.5rem;
+    overflow:scroll;
+    scrollbar-color: white #333;
+    border:solid #bbb 2px;
+}
+
+.form-input {
+    font-family:lato;
+    height:2.5rem;
+    width:100%;
+    padding:0 .7rem;
+    background:#333;
+    color:white;
+    font-size:1rem;
+    border:none;
+}
+
+.description-field {
+    padding:.7rem .7rem;
+    height:5rem;
+    resize:none;
+}
+
+.title-field, .description-field {
+    border:solid #777 2px;
+}
+
+label {
+    margin:0;
+    padding:0;
+}
+
+.milestone-dates-wrapper {
+    display:flex;
+    justify-content: center;
+    margin-top:.5rem;
+    gap:.5rem;
+}
+
+.goal-date {
+    font-size:.9rem;
+}
+
+
+.goal-date-total {
+    display:block;
+}
+
+.goal-date-num {
+    font-size:1.5rem;
+    font-weight:bold;
+}
+
+.milestone-dates-section {
+    margin-bottom:.4rem;
+    text-align:center;
+    width:100%;
+    background:#333;
+    border:solid #777 2px;
+}
+
+.add-milestone-button {
+    width:2rem;
+    height:2rem;
+    background-color: #4caf50;
+    border:none;
+    color:white;
+    border-radius:50%;
+    margin:0 .5rem;
+}
+
+.add-milestone-button:hover {
+    cursor: pointer;
+    transform:scale(1.05);
+    background-color: hsl(122, 39%, 55%);
+}
+
+.milestone-wrapper {
+    width:90%;
+    margin:auto;
+    margin-bottom: 1.7rem;
+    background:#444;
+    padding:1rem 1rem;
+    border:solid #777 2px;
+}
+
+.date-input {
+    height:80%;
+    margin-bottom:.5rem;
+    border-radius:.3rem;
+    width:100%;
+    border:none;
+    background:#333;
+    color:white;
+    text-transform: uppercase;
+    padding:.3rem;
+}
+
+.remove-milestone-button-and-title {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom:.3rem;
+}
+
+.milestone-name-input {
+    width:88%;
+    padding:0 .7rem;
+    border:solid #777 2px;
+}
+
+.remove-milestone-container {
+    width:12%;
+    height:100%;
+    text-align: right;
+}
+
+.remove-milestone-button {
+    width:2rem;
+    height:2rem;
+    background-color: #af534c;
+    border:none;
+    color:white;
+    border-radius:50%;
+}
+
+.remove-milestone-button:hover {
+    cursor: pointer;
+    background-color: hsl(4, 39%, 55%);
+    transform:scale(1.05);
+}
+
+.goals-title {
+    width:min-content;
+    margin-right:.25rem;
+}
+
+.goal-button {
+    text-align:center;
+    align-items:center;
+
+    height:2.5rem;
+    width:2.5rem;
+
+    font-size:1.4rem;
+
+    color:hsl(224, 100%, 70%);
+    background:hsl(0, 0%, 20%);
+
+    border-radius:50%;
+    border:solid hsl(224, 100%, 70%) .2rem;
+}
+
+.goal-button:hover {
+    cursor:pointer;
+    background:hsl(0, 0%, 25%);
+    transform:scale(1.1);
+}
+
+.goal-button:active {
+    color:hsl(224, 100%, 70%);
+    background:hsl(0, 0%, 20%);
+    transform:scale(1);
+}
+
+.goals-inner-init {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    text-align:center;
+    transition:any 1s linear ;
+}
+
+.ambition-bg {
+    background-image: url('./ambition-bg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.goals-inner-init-items {
+    padding:5rem;
+    background:hsla(240, 100%, 0%, 0.75);
+    border-radius:1rem;
+  
+}
+
+.goal-button-init {
+    text-align:center;
+    align-items:center;
+    height:15rem;
+    width:15rem;
+    font-size:4rem;
+    background:hsla(0, 0%, 20%, .75);
+    border-radius:50%;
+    border:solid aqua .2rem;
+    color:aqua;
+    margin:1rem;
+}
+
+.goal-button-init:hover {
+    cursor:pointer;
+    background:hsla(0, 0%, 25%, .75);
+    transform: scale(1.03);
+    transition: all .05s linear;
+
+}
+
+.goal-button-init:active {
+    transform: scale(1.00);
+    background:hsla(0, 0%, 20%, .75);
+}
+
+.goal-text-init {
+    font-family:'Trebuchet MS';
+    color:whitesmoke;
+    font-size:1.5rem;
+    border-radius: 1rem;
+    border-bottom:solid #667 3px;
+    padding:1rem;
+}
+
+.goals-inner {
+    display:flex;
+    align-items:center;
+    margin-top:1rem;
+}
+
+.goals-container {
+    align-items: center;
+    width:100%;
+}
+
+form {
+    margin:1rem;
+}
+
+input {
+    display:block;
+}
+
+.upcoming-section {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    overflow-x:auto;
+    height:100%;
+    display:flex;
+    align-items: center;
+}
+
+.upcoming-section-inner, .milestone-section {
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.upcoming-section-inner {
+    width:min-content;
+    flex-wrap:nowrap;
+}
+
+
+.upcoming-milestone {
+    background:hsl(120, 22%, 41%);
+    margin:0 0 1.5rem 1.5rem;
+    border-radius:.75rem;
+    width:12rem;
+}
+
+.milestone-section {
+    display:none;
+    margin:0 .75rem 1.5rem .75rem;
+    background:hsl(120, 22%, 35%);
+    border-radius:.75rem;
+    height:min-content;
+    
+    flex-direction: row-reverse;
+}
+
+.milestone-section:hover {   
+    transform:scale(1.05);
+    border-radius:1rem;
+}
+
+.visible {
+    display:grid;
+}
+
+.add-top-margin-to-goal-milestones {
+    margin-top:1.75rem;
+}
+
+.goal-milestones-inner {
+    width:100%;
+    justify-content:center;
+}
+
+.goal-milestones-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 1rem;
+}
+
+.goal-milestones-container-inner {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.goal-date-section {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:hsl(120, 22%, 41%);
+    padding:1rem;
+    border-bottom-left-radius:1rem;
+    border-bottom-right-radius:1rem;
+}
+
+.upcoming-milestone-container {
+    margin:0 .75rem 0 .75rem;
+    background:hsl(120, 22%, 35%);
+    border-radius:.75rem;
+    height:min-content;
+    min-width:12rem;
+    max-width:15rem;
+    flex:1;
+    flex-direction: row-reverse;
+    border-bottom-left-radius:1rem;
+    border-bottom-right-radius:1rem;
+    cursor:pointer;
+}
+
+.upcoming-milestone-container:hover {   
+    transform:scale(1.05);
+}
+
+.view-goal-title {
+    text-align: center;
+    background:#222;
+    padding:1.5rem;
+    border-radius:1rem;
+    border-top-left-radius:0;
+    border-top-right-radius:0;}
+
+.upcoming-milestone-content {   
+    min-width:12rem;
+    width:100%;
+    height:min-content;
+    text-align: center;
+}
+
+.view-milestone-content {   
+    min-width:12rem;
+    width:100%;
+    height:min-content;
+    text-align: center;
+}
+
+.view-container {
+    width:12rem;
+    max-width: 12rem;
+    margin:0 .2rem;    
+}
+
+.view-goal-description {
+    margin-bottom:1rem;
+}
+
+.rounded-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.view-upcoming-milestone {
+    background:hsl(120, 22%, 41%);
+    padding:1rem;
+    border-radius:.75rem;
+    width:15rem;
+    height:min-content;
+    margin-bottom:1rem;
+}
+
+.goal-milestone-title {
+    padding:1rem .5rem;
+    color:hsl(81, 70%, 70%);
+    font-size:1rem;
+    text-align:center;
+    width:100%;
+}
+
+.goal-milestone-title-container {
+    display:flex;
+    align-items: center;
+    height:4.5rem;
+    background:hsl(120, 22%, 35%);   
+}
+
+.upcoming-goal-milestone-title-container {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.to {
+    margin:0 .3rem;
+}
+
+.to-goals {
+    text-align:center;
+    margin:.2rem .5rem;
+    font-weight:bold;
+}
+
+.view-dates {
+    display:flex;
+}
+
+.milestone-selected {
+    transition:none;
+    border:solid hsl(120, 22%, 71%) 4px;
+}
+
+.upcoming-milestones-title, .goals-title {
+    padding:1rem;
+    font-size:2rem;
+    font-family:'Trebuchet MS';
+}
+
+.upcoming-milestones-title {
+    padding:0;
+    margin:0;
+    margin-left:1rem;
+}
+
+.upcoming-milestone:hover {
+    cursor:pointer;
+}
+
+.milestone-count-container {
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+    gap:.5rem;
+    margin-top:1rem;
+}
+
+.milestone-count {
+    width:3rem;
+}
+
+.milestone-count-container progress[value]::-moz-progress-bar {
+    background-color: hsl(120, 22%, 41%);
+}
+
+.checkbox-container {
+    display:flex;
+    justify-content:flex-end;
+}
+
+.empty-checkbox {
+    height: 1rem;
+    width: 1.5rem;
+    position: relative;
+ 
+}
+
+.empty-checkbox::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    background: #333; 
+    transform: translate(-.6rem, -.6rem);
+    border:solid hsl(120, 22%, 35%) .3rem;
+    border-radius:7px;
+}
+
+.clicked-checkbox {
+    display:flex;
+    height: 1rem;
+    width: 1.5rem;
+    position: relative; 
+    align-items:center;
+}
+
+.clicked-checkbox::before {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#333;
+    content: '★'; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    background: hsl(81, 94%, 55%); 
+    transform: translate(-.6rem, -.6rem);
+    border:solid hsl(120, 22%, 35%) .3rem;
+    border-radius:7px;
+}
+
+.view-goal-milestones {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    gap:1rem;
+    margin:1rem;
+}
+
+.view-goal-section {
+    background:hsl(120, 2%, 20%);
+    padding:1rem;
+    padding:0;
+    border-radius:.75rem;
+    border:solid hsl(120, 12%, 30%) 5px;
+    overflow:auto;
+    width:97%;
+    cursor: pointer;
+    display:flex;
+    position:relative;
+}
+
+.open-icon {
+    position:sticky;
+    top:0;
+    height:100%;
+    padding:.5rem;
+    display:flex;
+    align-items: center;
+    background:hsl(120, 12%, 30%);
+}
+
+.view-top-section {
+    padding-bottom:0;
+    margin-bottom:.5rem;
+}
+
+.view-goal-sub-container {
+    display:block;
+    margin:0 auto;
+    width:100%;
+}
+
+.collapsed {
+    width:2.3rem;
+    padding:0;
+    margin:0;
+    overflow:hidden;
+}
+
+.collapsed:hover .open-fa {
+    background:hsl(120, 12%, 40%);
+    color:hsl(81, 70%, 70%);
+}
+
+.collapsed:hover .open-icon {
+    background:hsl(120, 12%, 40%);
+}
+
+.collapsed:hover {
+    border:solid hsl(120, 12%, 40%) 5px;
+}
+
+.open {
+    transition:all .2s linear .2s;
+}
+
+.open:hover .open-fa {
+    background:hsl(120, 12%, 40%);
+    color:hsl(81, 70%, 70%);
+}
+
+.open:hover .open-icon {
+    background:hsl(120, 12%, 40%);
+}
+
+.open:hover {
+    border:solid hsl(120, 12%, 40%) 5px;
+}
+
+.goal {
+    background:hsl(0, 0%, 18%);
+    border:solid hsl(0, 0%, 18%) 5px;
+    border-radius:.75rem;
+    margin:1rem;
+}
+
+.goal:hover {
+    background:hsl(0, 0%, 20%);
+    transform:scale(1.02);
+}
+
+.goal-content {
+    padding:1rem;
+}
+
+.completed-goal {
+    border:solid hsl(120, 22%, 41%) 3px;
+}
+
+.goal-edit-and-delete {
+    display:flex;
+    align-items:start;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+    background:#222;
+    padding:.5rem;
+    border-radius:.5rem;
+}
+
+.edit-button {
+    width:1.5rem;
+    height:1.5rem;
+    background:transparent;
+    color:white;
+    border:grey solid 1px;
+    padding:.2rem;
+    border-radius:50%;
+
+    background: #517fff;
+}
+
+.edit-button:hover {
+    cursor:pointer;
+    background: hsl(224, 100%, 70%);
+    transform:scale(1.1);
+}
+
+.delete-button {
+    background:transparent;
+    color:white;
+    border:none;
+    padding:.2rem;
+    border-radius:50%;
+    background:rgba(199, 61, 61, 0.74);
+    width:1.5rem;
+    height:1.5rem;
+}
+
+.delete-button:hover {
+    cursor:pointer;
+    background:hsla(0, 55%, 56%, 0.74);
+    transform:scale(1.1);
+}
+
+.delete-container {
+    display:flex;
+    align-items:start;
+}
+
+.delete-button-modal {
+    background:transparent;
+    color:white;
+    border:none;
+    font-size:2rem;
+    cursor:pointer;
+    margin-right:1rem;
+}
+
+.delete-button-modal:hover {
+    transform:scale(1.1)
+}
+
+.delete-container-modal {
+    display:flex;
+    justify-content:flex-end;
+}
+
+.delete-button:hover {
+    cursor:pointer;
+}
+
+.edit-button:hover {
+    cursor:pointer;
+}
+
+.goal:hover {
+    cursor:pointer;
+}
+
+@media (max-width:992px){
+    .upcoming-milestones-and-preview {
+        display:block;
+        height:min-content;
+    }   
+
+    .upcoming-milestones-and-title {
+        height:min-content;
+        border:none;
+    }
+
+    .view-goal-section {
+        width:100%;
+        overflow-y:hidden;
+        display:block;
+        height:20.5rem;
+    }
+
+    .view-goal-milestones {
+        height:11rem;
+        overflow-x:scroll;
+        flex-wrap: nowrap;
+        justify-content:flex-start;
+    }
+
+    .upcoming-section {
+        position:relative;
+        height:min-content;
+        height:13rem;
+        margin-bottom:1rem;
+    }
+
+    .collapsed {
+        height:3rem;
+        padding:0;
+        margin:0;
+        overflow:hidden;
+    }
+
+    .open {
+        transition:all .2s linear;
+        height:20.5rem;
+    }
+    
+    .open-icon {
+        margin:auto;
+        padding:.5rem;
+        height:2.6rem;
+        display:flex;
+        align-items: center;
+    }
+
+    .open-icon p {
+        margin:auto;
+    }
+}
+
+@media (max-width:768px){
+    .ambition-tool-tip {
+        width:28rem;
+        margin-top:1rem;
+        margin-left:-25.5rem;
+    }
+
+    .upcoming-milestones-title {
+        font-size:1.8rem;
+    }
+
+    .goals-title {
+        font-size: 1.9rem;
+    }
+
+    .upcoming-milestones-and-preview {
+        margin:1rem;
+        margin-bottom:0;
+    }
+
+    .view-goal-section {
+        justify-content: center;
+        background: transparent;
+        border:none;
+        border-top:solid hsl(120, 12%, 30%) 5px;
+        margin-bottom:0;
+        padding-bottom:0;
+        height:30rem;
+    }
+
+    .view-goal-milestones {
+        display:flex;
+        flex-wrap:wrap;
+        margin:auto;
+        height:20rem;
+        background:hsl(0, 0%, 18%);
+        padding:1rem 0;
+        border-radius: .5rem;
+        display:block;
+        margin:0 1rem;
+        height:30rem;
+
+    }
+
+    .view-container {
+        margin:auto;
+        margin-bottom:1rem;
+    }
+
+    .view-top-section {
+        margin-bottom:0; 
+    }
+    
+    .collapsed {
+        height:3rem;
+        padding:0;
+        margin:0;
+        overflow:hidden;
+    }
+
+    .open {
+        transition:all .2s linear;
+        height:30rem;
+    }
+    
+}
+
+@media (max-width:576px){
+    .goal-milestones-container {
+        display:block;
+        width:14rem;
+        margin:0 auto;
+    }
+
+    .modal {
+        width:98%;
+    }
+}
+
+@media (max-height:1275px){
+    .create-milestones-section {
+        height:20rem;
+    }
+}
+
+@media (max-height:806px){
+    .create-milestones-section {
+        height:20rem;
+    }
+    
+    .modal {
+        height:42rem;
+    }
+}
