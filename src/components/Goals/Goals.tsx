@@ -16,9 +16,9 @@ export default
             const {goalsLS}:{goalsLS:goalFormType[]} = useContext(GoalContext)
 
             useEffect(()=>{
-                !goalsLS || (goalsLS && goalsLS.length <=0)?
-                    document.body.style.width = '100%': 
-                    document.body.style.width = '90%'
+                !goalsLS || (goalsLS && goalsLS.length <= 0)?
+                document.body.style.maxWidth = '100%': 
+                document.body.style.maxWidth = '75%'
             })
 
         return (

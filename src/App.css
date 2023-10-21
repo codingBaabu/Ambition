@@ -11,8 +11,6 @@ body {
     font-family:Inter;
     position:relative;
     margin-bottom:9rem;
-    width:90%;
-    max-width:75rem;
     margin:auto;
     scrollbar-color: hsl(120, 22%, 41%) #333;
 }
@@ -862,7 +860,7 @@ input {
 }
 
 .open {
-    transition:all .2s linear .2s;
+    transition:all .3s linear;
 }
 
 .open:hover .open-fa {
