@@ -5,24 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { goalFormType } from '../AddGoal/useForm';
 
-type GoalContextProps = {
-    goalsLS:goalFormType[],
-    viewToggle:(goalID:string, milestoneID:string, e:React.MouseEvent<HTMLButtonElement | HTMLDivElement>)=>void,
-    viewGoalId:string,
-    setViewGoalId:(newId:string)=>void,
-    viewMilestoneId:string,
-    setViewMilestoneId:(newId:string)=>void
-}
-
-type milestone = {
-    id:string,
-    milestoneId:string,
-    milestoneTitle:string,
-    goalTitle:string,
-    startDate:string,
-    endDate:string,
-} | null
-
 export default function UpcomingMilestone(){
     const [upcomingMilestones, setUpcomingMilestones] = useState<milestone[]>([])
     const {goalsLS, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, setViewMilestoneId}:GoalContextProps = useContext(GoalContext)
@@ -146,3 +128,22 @@ export default function UpcomingMilestone(){
         </div>
     )
 }
+
+
+type GoalContextProps = {
+    goalsLS:goalFormType[],
+    viewToggle:(goalID:string, milestoneID:string, e:React.MouseEvent<HTMLButtonElement | HTMLDivElement>)=>void,
+    viewGoalId:string,
+    setViewGoalId:(newId:string)=>void,
+    viewMilestoneId:string,
+    setViewMilestoneId:(newId:string)=>void
+}
+
+type milestone = {
+    id:string,
+    milestoneId:string,
+    milestoneTitle:string,
+    goalTitle:string,
+    startDate:string,
+    endDate:string,
+} | null
