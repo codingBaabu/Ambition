@@ -298,7 +298,7 @@ progress[value] {
 }
 
 .form-input {
-    font-family:lato;
+    font-family:Inter;
     height:2.5rem;
     width:100%;
     padding:0 .7rem;
@@ -378,6 +378,7 @@ label {
 }
 
 .date-input {
+    font-family:Inter;
     height:80%;
     margin-bottom:.5rem;
     border-radius:.3rem;
@@ -400,6 +401,8 @@ label {
     width:88%;
     padding:0 .7rem;
     border:solid #777 2px;
+    font-family:Inter;
+
 }
 
 .remove-milestone-container {
@@ -531,6 +534,7 @@ form {
 
 input {
     display:block;
+    font-family:Inter;
 }
 
 .upcoming-section {

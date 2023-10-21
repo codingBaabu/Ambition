@@ -55,8 +55,7 @@ export default function Modal({ id }: showType ){
                             className='modal-form' 
                             onSubmit={(e)=>endDateAfterStartDateCheck(e, formData)}>
                             <h1 
-                                className='modal-title'>{id?'Edit':'Create'} 
-                                    Goal
+                                className='modal-title'>{id?'Edit ':'Create '} Goal
                             </h1>
                             <Title 
                                 formChanged={formChanged} 
