@@ -92,7 +92,11 @@ export default function Goal({ children }: {children:goalFormType} ):JSX.Element
            </div>
 
            <div className='goal-content'>
-            <h3>{title} - <span className='goal-description'>{description}</span></h3>
+            <h3>
+                <span className='goal-title-colored'>{title} - </span> 
+                   
+                <span className='goal-description'>{description}</span>
+            </h3>
 
                 <div className='milestone-count-container'>
                     {!viewingMilestone && getMilestoneProgressBars()}

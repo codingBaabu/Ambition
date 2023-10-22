@@ -13,6 +13,7 @@ export default function Milestones({
                             name='milestoneTitle'
                             value={milestone.milestoneTitle} 
                             onChange={(e)=>formChanged(e, index)}
+                            maxLength={35}
                             required
                     />
                     <div className='remove-milestone-container'>

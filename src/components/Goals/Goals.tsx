@@ -1,4 +1,4 @@
-import {ReactNode, useContext, useEffect} from 'react'
+import { ReactNode, useContext } from 'react'
 import { GoalContext } from '../../App'
 import { goalFormType } from '../AddGoal/useForm'
 
@@ -10,19 +10,10 @@ type GoalProps = {
 
 export default 
     function Goals( 
-        {children, toggle, isViewingInitModal} : GoalProps ) 
-            : JSX.Element {
-                
+        {children, toggle, isViewingInitModal} : GoalProps ) : JSX.Element {
             const {goalsLS}:{goalsLS:goalFormType[]} = useContext(GoalContext)
-
-            useEffect(()=>{
-                !goalsLS || (goalsLS && goalsLS.length <= 0)?
-                document.body.style.maxWidth = '100%': 
-                document.body.style.maxWidth = '75%'
-            })
-
         return (
-            <div className={`goals-container ${!goalsLS || (goalsLS && goalsLS.length <=0)?'ambition-bg':''}`}>
+            <div className={`goals-container ${!goalsLS || (goalsLS && goalsLS.length <=0)?'':''}`}>
                 {goalsLS && goalsLS.length>0 && 
                     <div className='goals-inner'>
                         <h2 className='goals-title' >Goals</h2>

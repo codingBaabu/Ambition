@@ -52,32 +52,33 @@ export default function App() {
         toggle, viewToggle, viewGoalId, setViewGoalId, viewMilestoneId, 
         setViewMilestoneId, deleteGoal, toggleChecked, setId, isCollapsed, toggleIsCollapsed
       }}>
-      
-      <div className='container'>  
-        {goalsLS && goalsLS.length>0 && 
-          <div className='top-section'>
-              <div>
-                <AmbitionBar/>
-                <CompletedBar/>
+      <div className={`ambition-container ${!goalsLS || (goalsLS && goalsLS.length <=0)?'ambition-bg':''}`}>
+        <div className='container'>  
+          {goalsLS && goalsLS.length>0 && 
+            <div className='top-section'>
+                <div>
+                  <AmbitionBar/>
+                  <CompletedBar/>
+                </div>
+              
+              <div className={`upcoming-milestones-and-preview 
+                ${isCollapsed?
+                  'upcoming-milestones-full-width':
+                  'upcoming-milestones-reduced-width'}`}>
+                <UpcomingMilestone/>
+                <ViewGoal id={viewGoalId} goals = {goalsLS} />
               </div>
-            
-            <div className={`upcoming-milestones-and-preview 
-              ${isCollapsed?
-                'upcoming-milestones-full-width':
-                'upcoming-milestones-reduced-width'}`}>
-              <UpcomingMilestone/>
-              <ViewGoal id={viewGoalId} goals = {goalsLS} />
             </div>
+          }
+
+          <div className='container-inner'>
+            <Goals toggle={toggle} isViewingInitModal={isViewingInitModal}>
+                {goalsLS && goals}
+            </Goals>
+
+            {isAddingGoal && <Modal />}
+            {isEditingGoal && <Modal id={id} />}
           </div>
-        }
-
-        <div className='container-inner'>
-          <Goals toggle={toggle} isViewingInitModal={isViewingInitModal}>
-              {goalsLS && goals}
-          </Goals>
-
-          {isAddingGoal && <Modal />}
-          {isEditingGoal && <Modal id={id} />}
         </div>
       </div>
     </GoalContext.Provider>
