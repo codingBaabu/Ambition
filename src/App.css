@@ -41,7 +41,7 @@ body {
 .ambition-bar {
     display:flex;
     align-items: center;
-    margin:2rem 1.5rem .5rem 1.5rem;
+    margin:.5rem 0 .5rem 1.5rem;
 }
 
 .more-info-ambition {
@@ -141,7 +141,7 @@ ul.ambition-tooltip-ul > li {
     display:flex;
     align-items: center;
     flex-wrap:nowrap;
-    margin:0 1.5rem .5rem 1.5rem;
+    margin:0 0 .5rem 1.5rem;
 }
 
 .completion-bar-container label {
@@ -192,7 +192,8 @@ progress[value] {
 }
 
 .upcoming-milestones-and-title {
-    border-bottom:solid #333 3px;
+    box-shadow: 2rem 1rem 1rem hsl(0, 0%, 11%);
+    border-radius: 1rem;
     align-items: center;
     position:relative;
 }
@@ -607,7 +608,7 @@ input {
 }
 
 .add-top-margin-to-goal-milestones {
-    margin-top:1.75rem;
+    margin-top:1rem;
 }
 
 .goal-milestones-inner {
@@ -648,6 +649,7 @@ input {
     border-bottom-left-radius:1rem;
     border-bottom-right-radius:1rem;
     cursor:pointer;
+    overflow-wrap:break-word;
 }
 
 .upcoming-milestone-container:hover {   
@@ -668,6 +670,7 @@ input {
     width:100%;
     height:min-content;
     text-align: center;
+    overflow-wrap:break-word;
 }
 
 .view-milestone-content {   
@@ -675,6 +678,7 @@ input {
     width:100%;
     height:min-content;
     text-align: center;
+    overflow-wrap:break-word;
 }
 
 .view-container {
@@ -828,6 +832,7 @@ input {
     justify-content: center;
     gap:1rem;
     margin:1rem;
+    height:85%;
 }
 
 .view-goal-section {
@@ -856,10 +861,28 @@ input {
     margin-bottom:.5rem;
 }
 
+.time-and-bars {
+    margin-top:2rem;
+    display:flex;
+    align-items: center;
+}
+
+.bars {
+    width:100%;
+}
+
 .view-goal-sub-container {
     display:block;
     margin:0 auto;
     width:100%;
+}
+
+.current-time-container {
+    width:max-content;
+}
+
+.current-time {
+    font-size: 3.5rem;
 }
 
 .collapsed {
@@ -876,10 +899,6 @@ input {
 
 .collapsed:hover .open-icon {
     background:hsl(120, 12%, 40%);
-}
-
-.collapsed:hover {
-    border:solid hsl(120, 12%, 40%) 5px;
 }
 
 .open {
@@ -1016,6 +1035,18 @@ input {
         width:90%;
     }
 
+    .time-and-bars {
+        display:block;
+    }
+
+    .ambition-bar, .completion-bar-container {
+        margin-left:0;
+    }
+
+    .current-time-container {
+        margin:auto;
+    }
+
     .goal {
         margin:1rem 0;
     }
@@ -1028,6 +1059,7 @@ input {
     .upcoming-milestones-and-title {
         height:min-content;
         border:none;
+        box-shadow: none;
     }
 
     .view-goal-section {
@@ -1060,6 +1092,11 @@ input {
         padding:0;
         margin:0;
         overflow:hidden;
+        border-bottom:solid hsl(120, 12%, 30%) 1rem;
+    }
+
+    .collapsed:hover {
+        border-bottom:solid hsl(120, 12%, 40%) 1rem;
     }
 
     .open {
@@ -1078,17 +1115,17 @@ input {
     .open-icon p {
         margin:auto;
     }
+
+    .view-goal-title {
+        margin:1rem 0;
+    }
 }
 
-@media (max-width:768px){
+@media (max-width:680px){
     .ambition-tool-tip {
         width:28rem;
         margin-top:1rem;
         margin-left:-25.5rem;
-    }
-
-    .upcoming-milestones-title {
-        font-size:1.8rem;
     }
 
     .goals-title {
@@ -1108,10 +1145,6 @@ input {
         height:30rem;
         box-shadow: 0 10px 1rem hsl(0, 0%, 10%);
         border-radius:1rem;
-    }
-
-    .view-goal-title {
-        margin-bottom:1rem;
     }
 
     .view-goal-milestones {
@@ -1156,13 +1189,18 @@ input {
 
 @media (max-width:576px){
     body {
-        width:95%;
+        width:100%;
     }
 
     .goal-milestones-container {
         display:block;
         width:14rem;
         margin:0 auto;
+    }
+
+    .upcoming-milestones-title {
+        font-size:1.7rem;
+        margin-left:.5rem;
     }
 
     .modal {

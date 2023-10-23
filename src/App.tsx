@@ -7,6 +7,7 @@ import AmbitionBar from './components/Bars/AmbitionBar'
 import CompletedBar from './components/Bars/CompletedBar'
 import ViewGoal from './components/ViewGoal/ViewGoal'
 import useToggles from './useToggles'
+import CurrentTime from './components/CurrentTime/CurrentTime'
 
 const GoalContext:any = createContext(null)
 
@@ -56,9 +57,16 @@ export default function App() {
         <div className='container'>  
           {goalsLS && goalsLS.length>0 && 
             <div className='top-section'>
-                <div>
-                  <AmbitionBar/>
-                  <CompletedBar/>
+                <div className='time-and-bars'>
+
+                  <div>
+                    <CurrentTime/>
+                  </div>
+
+                  <div className='bars'>
+                    <AmbitionBar/>
+                    <CompletedBar/>
+                  </div>
                 </div>
               
               <div className={`upcoming-milestones-and-preview 
