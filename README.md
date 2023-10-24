@@ -1,5 +1,24 @@
-AMBITION is a goal tracker that replaces your 'new tab' page. Developed primarily using React, Typescript and Vite, it is a simple, effective way for you to conquer your day to day, with the ever-ticking 'ambition' bar keeping you on your toes. Keep that fire lit!
+# AMBITION 
+This is a goal tracker that replaces your 'new tab' page on Firefox
 
----How do I get this up and running ?
-    run npm install 
-    run npm start dev
+## FEATURES
+- create, read, update, delete capabilities for both goals and milestones
+- ambition bar that ticks down every second (can be fed by completing milestones)
+- dynamic Upcoming section that can be filtered to within seven days
+- persisting data via local storage
+- collapsible goal preview section
+
+## HOW DO I GET THIS UP AND RUNNING ?
+- run npm install
+- run npm start dev
+
+## SCREENSHOTS
+
+### Initial Screen
+![App Screenshot](./public/images/screenshots/initial-screen.png)
+
+### Homepage
+![App Screenshot](./public/images/screenshots/homepage.png)
+
+### Editing Goal
+![App Screenshot](./public/images/screenshots/editing-goal.png)
