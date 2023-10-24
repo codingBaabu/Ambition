@@ -1,7 +1,9 @@
 import { formChangedType } from "./useForm"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Milestones({ 
-        formChanged, removeMilestone, milestone, index, isPredated 
+        formChanged, removeMilestone, milestone, index, isPredated, isPredatedStart
     }:Milestones ){
 
         return (
@@ -17,11 +19,10 @@ export default function Milestones({
                             required
                     />
                     <div className='remove-milestone-container'>
-                        <button className='remove-milestone-button' 
-                                type="button" 
-                                onClick={()=>removeMilestone(index)}>
-                                    x
-                        </button>
+                    <FontAwesomeIcon 
+                        icon={faCircleXmark} 
+                        onClick={()=>removeMilestone(index)} 
+                        className='delete-button' />
                     </div>
                 </div>
 
@@ -44,7 +45,8 @@ export default function Milestones({
                 </div>
 
 
-                { isPredated && <p>End cannot pre-date start</p> }
+                { isPredatedStart && <p className='error-message'>Start cannot pre-date today</p> }
+                { isPredated && <p className='error-message'>End cannot pre-date start</p> }
             </div>
         )
 }
@@ -61,5 +63,6 @@ type Milestones = {
         checked:boolean
     },
     index:number,
-    isPredated:boolean
+    isPredated:boolean,
+    isPredatedStart:boolean
 }

@@ -28,11 +28,12 @@ export default function CompletedBar(){
             <div className='completion-bar-container' >
                 <label htmlFor='completed'>Completed: {completedMilestones.length+'/'+totalMilestones.length} </label>
                 {
-                    totalMilestones.map((_, index) => (
-                        <progress key={index} className="completion-bar" max='1' value={completedMilestones[index]?'1':'0'}></progress>
-                    ))
+                    <progress 
+                        className="completion-bar" 
+                        max={milestones.length} 
+                        value={completedMilestones.length}>
+                    </progress>
                 }
-
                 
             </div>
         </div>

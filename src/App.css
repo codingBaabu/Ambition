@@ -46,7 +46,7 @@ body {
 
 .more-info-ambition {
   
-    margin-left:1rem;
+    margin-right:1rem;
     color:#517fff;
     border-radius:100%;
     font-size:1.2rem;
@@ -61,20 +61,27 @@ body {
 }
 
 .ambition-tool-tip {
-    visibility: hidden;
-    opacity:0;
     width: 27.5rem; 
     background-color: hsl(0, 0%, 18%);
     color: white;
-
     position: absolute;
     left: 50%;
-    top: 0; 
-    margin-left: -28rem; 
+    top:1.3rem;
+    margin-right: -28rem; 
     transition: opacity 0.3s;
     border:solid #3e7fd4 .1rem;
     z-index:5;
     box-shadow: 10px 10px 16px 5px #222;
+}
+
+.expand-tooltip {
+    visibility:visible;
+    opacity:1;
+}
+
+.collapse-tooltip {
+    visibility: hidden;
+    opacity:0;
 }
 
 .ambition-tooltip-title-container {
@@ -122,6 +129,11 @@ ul.ambition-tooltip-ul > li {
 .more-info-ambition:hover .ambition-tool-tip {
   visibility: visible;
   opacity: 1;
+}
+
+.more-info-ambition:active .ambition-tool-tip {
+    visibility: visible;
+    opacity: 1;  
 }
 
 .ambition-bar label {
@@ -333,8 +345,13 @@ label {
     gap:.5rem;
 }
 
+.error-message {
+    color:hsl(18, 90%, 55%);
+}
+
 .goal-date {
     font-size:.9rem;
+    width:4.3rem;
 }
 
 
@@ -356,19 +373,25 @@ label {
 }
 
 .add-milestone-button {
-    width:2rem;
-    height:2rem;
-    background-color: #4caf50;
+    width:1.8rem;
+    height:1.8rem;
+    color: hsl(122, 39%, 49%);
     border:none;
-    color:white;
-    border-radius:50%;
+    background:transparent;
     margin:0 .5rem;
+    padding:.1rem;
 }
 
 .add-milestone-button:hover {
     cursor: pointer;
     transform:scale(1.05);
-    background-color: hsl(122, 39%, 55%);
+    color: hsl(122, 39%, 59%);
+}
+
+.add-milestone-button-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .milestone-wrapper {
@@ -443,11 +466,9 @@ label {
 
     font-size:1.4rem;
 
+    background:hsl(0, 0%, 10%);
     color:hsl(224, 100%, 70%);
-    background:hsl(0, 0%, 20%);
-
-    border-radius:50%;
-    border:solid hsl(224, 100%, 70%) .2rem;
+    border-radius:100%;
 }
 
 .goal-button:hover {
@@ -457,8 +478,7 @@ label {
 }
 
 .goal-button:active {
-    color:hsl(224, 100%, 70%);
-    background:hsl(0, 0%, 20%);
+    color:hsl(224, 100%, 80%);
     transform:scale(1);
 }
 
@@ -946,37 +966,32 @@ input {
 }
 
 .edit-button {
-    width:1.5rem;
-    height:1.5rem;
+    width:1.3rem;
+    height:1.3rem;
     background:transparent;
-    color:white;
-    border:grey solid 1px;
-    padding:.2rem;
+    color: hsl(224, 100%, 70%);
+    border:none;
     border-radius:50%;
-
-    background: #517fff;
 }
 
 .edit-button:hover {
     cursor:pointer;
-    background: hsl(224, 100%, 70%);
+    color: hsl(224, 100%, 80%);
     transform:scale(1.1);
 }
 
 .delete-button {
-    background:transparent;
-    color:white;
+    background:#222;
     border:none;
-    padding:.2rem;
     border-radius:50%;
-    background:rgba(199, 61, 61, 0.74);
+    color:hsl(18, 88%, 40%);
     width:1.5rem;
     height:1.5rem;
 }
 
 .delete-button:hover {
     cursor:pointer;
-    background:hsla(0, 55%, 56%, 0.74);
+    color:hsl(18, 88%, 50%);
     transform:scale(1.1);
 }
 
@@ -989,9 +1004,16 @@ input {
     background:transparent;
     color:white;
     border:none;
-    font-size:2rem;
     cursor:pointer;
-    margin-right:1rem;
+    margin-right:.5rem;
+    margin-bottom: .5rem;
+    width:2rem;
+    border-radius: 100%;
+    color:hsla(0, 0%, 100%, .8);
+    height:2rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .delete-button-modal:hover {
@@ -1124,9 +1146,9 @@ input {
 
 @media (max-width:680px){
     .ambition-tool-tip {
-        width:28rem;
-        margin-top:1rem;
-        margin-left:-25.5rem;
+        width:85vw;
+        top:1.4rem;
+        left:-5rem;
     }
 
     .goals-title {
@@ -1143,7 +1165,8 @@ input {
         background: transparent;
         margin-bottom:0;
         padding-bottom:0;
-        height:30rem;
+        height:min-content;
+        max-height:30rem;
         box-shadow: 0 10px 1rem hsl(0, 0%, 10%);
         border-radius:1rem;
     }
@@ -1157,7 +1180,8 @@ input {
         padding:1rem 0;
         display:block;
         margin:0 1rem;
-        height:30rem;
+        height:min-content;
+        max-height:30rem;    
     }
 
     .view-container {
@@ -1178,7 +1202,8 @@ input {
 
     .open {
         transition:all .2s linear;
-        height:36rem;
+        height:min-content;
+        max-height:36rem;        
         border-radius: .5rem;
     }
 
@@ -1191,6 +1216,32 @@ input {
 @media (max-width:576px){
     body {
         width:100%;
+    }
+
+    .ambition-tool-tip {
+        width:92vw;
+        top:1.4rem;
+        left:-6rem;
+    }
+
+    .ambition-tooltip-title-container {
+        padding:1rem;
+    }
+
+    .tagline {
+        font-size: .9rem;
+    }
+
+    .ambition-tooltip-title {
+        font-size: 1rem;
+    }
+
+    .ambition-tooltip-text-container {
+        padding:1rem;
+    }
+
+    .ambition-tooltip-text {
+        font-size: .9rem;
     }
 
     .goal-milestones-container {

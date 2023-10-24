@@ -1,10 +1,12 @@
 import { ReactNode, useContext } from 'react'
 import { GoalContext } from '../../App'
 import { goalFormType } from '../AddGoal/useForm'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 type GoalProps = {
     children:ReactNode,
-    toggle:(e:React.MouseEvent<HTMLButtonElement>)=>void,
+    toggle:(e:React.MouseEvent<HTMLOrSVGElement>)=>void,
     isViewingInitModal:boolean
 }
 
@@ -17,7 +19,7 @@ export default
                 {goalsLS && goalsLS.length>0 && 
                     <div className='goals-inner'>
                         <h2 className='goals-title' >Goals</h2>
-                        <button className='goal-button' onClick={(e)=>toggle(e)}>+</button>
+                        <FontAwesomeIcon icon={faCirclePlus} className='goal-button' onClick={(e)=>toggle(e)} />
                     </div>
                 }
 

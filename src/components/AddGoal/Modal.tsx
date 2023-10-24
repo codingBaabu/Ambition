@@ -8,6 +8,8 @@ import { FormEvent, useContext } from 'react';
 import { goalFormType } from './useForm';
 import FocusLock from 'react-focus-lock';
 import { GoalContext } from '../../App'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Modal({ id }: showType ){
     const {formData, formChanged, addMilestone, removeMilestone, setFormData} = useForm(id)
@@ -26,14 +28,22 @@ export default function Modal({ id }: showType ){
     function getMilestoneElements(){
         return formData.milestones.map((milestone, index) =>{
             let startDateAsDate = new Date(milestone.startDate)
+            startDateAsDate.setHours(0, 0, 0)
+
             let endDateAsDate = new Date(milestone.endDate)
-            let isPredated = startDateAsDate.getTime() > endDateAsDate.getTime()
-            isSubmittable = isPredated?false:true
+            endDateAsDate.setHours(0, 0, 0)
+
+            let now = new Date()
+            now.setHours(0, 0, 0)
+
+            let isPredated = startDateAsDate.getDate() > endDateAsDate.getDate()
+            let isPredatedStart = startDateAsDate.getDate()+1 < now.getDate()
+            isSubmittable = isPredated || isPredatedStart?false:true
 
             return (
                 <Milestones 
                     key={index} formChanged={formChanged} removeMilestone={removeMilestone} 
-                    milestone={milestone} index={index} isPredated={isPredated}/>
+                    milestone={milestone} index={index} isPredatedStart={isPredatedStart} isPredated={isPredated}/>
             )
         })
     }
@@ -44,11 +54,11 @@ export default function Modal({ id }: showType ){
                 <div className='inner-modal'>
                     <FocusLock>
                         <div className='delete-container-modal'>
-                            <button 
+                        <FontAwesomeIcon 
+                                icon={faCircleXmark}      
                                 className='delete-button-modal' 
-                                onClick={(e)=>id?editToggle(id, e):toggle(e)}>
-                                    x
-                            </button>     
+                                onClick={(e)=>id?editToggle(id, e):toggle(e)}
+                            />     
                         </div>
 
                         <form 
@@ -68,15 +78,13 @@ export default function Modal({ id }: showType ){
 
                             <fieldset 
                                 className='create-milestones-section'>
-                                <legend>
+                                <legend className='add-milestone-button-container'>
                                     Milestones
-                                    <button 
+                                    <FontAwesomeIcon icon={faCirclePlus} 
                                         name='add-milestone-button' 
                                         className='add-milestone-button' 
-                                        type="button" 
-                                        onClick={()=>addMilestone()}>
-                                            +
-                                    </button>
+                                        onClick={()=>addMilestone()}
+                                    />
                                 </legend>
                                 {getMilestoneElements()}
                             </fieldset>
@@ -101,12 +109,12 @@ type showType = {
 
 type GoalContextType = {
     toggle:(
-        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+        event:  React.MouseEvent<HTMLOrSVGElement | HTMLDivElement> |
                 React.FormEvent<HTMLFormElement>
             ) => void,
     editToggle:(
         id:string, 
-        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+        event:  React.MouseEvent<HTMLOrSVGElement | HTMLDivElement> |
                 React.FormEvent<HTMLFormElement>
             ) => void
 }

@@ -1,9 +1,9 @@
 
 import myImage from '../../checked-milestone-pic.png'
 
-export default function Tooltip(){
+export default function Tooltip({className}:{className:string}){
     return (
-        <div className='ambition-tool-tip'>
+        <div className={`ambition-tool-tip ${className}`}>
             <div className='ambition-tooltip-title-container'>
                 <h2 className='ambition-tooltip-title'>AMBITION |<span className='tagline'> KEEP THE FIRE BURNING</span></h2>            
             </div>

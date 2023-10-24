@@ -2,6 +2,8 @@ import { GoalContext } from '../../App';
 import {useContext, useState, useEffect} from 'react'
 import { getMonthAndYear, getDate } from "../../utils/utils";
 import { goalFormType } from "../AddGoal/useForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 type GoalContextType = {
     toggle:(
@@ -10,13 +12,12 @@ type GoalContextType = {
             ) => void,
     editToggle:(
         id:string, 
-        event:  React.MouseEvent<HTMLButtonElement | HTMLDivElement> |
+        event:  React.MouseEvent<HTMLButtonElement | HTMLOrSVGElement> |
                 React.FormEvent<HTMLFormElement>
             ) => void,
-    deleteGoal:(id:string, e:React.MouseEvent<HTMLButtonElement>)=>void
+    deleteGoal:(id:string, e:React.MouseEvent<HTMLOrSVGElement>)=>void
     toggleChecked:(id:string, index:number, e:React.MouseEvent<HTMLDivElement>)=>void
 }
-
 
 export default function Goal({ children }: {children:goalFormType} ):JSX.Element {
     const {id, title, description, milestones} = children
@@ -82,10 +83,11 @@ export default function Goal({ children }: {children:goalFormType} ):JSX.Element
         
                 <div className='goal-edit-and-delete'>
                     <div className='edit-container'>
-                        <button className='edit-button' onClick={(e)=>{editToggle(id, e)}}>&#x270E;</button>     
+                        <FontAwesomeIcon icon={faPenToSquare} className='edit-button' onClick={(e)=>{editToggle(id, e)}} />     
                     </div>
                     <div className='delete-container'>
-                       <button className='delete-button' onClick={(e)=>{deleteGoal(id, e)}}>x</button>     
+                       <FontAwesomeIcon icon={faCircleXmark} className='delete-button' onClick={(e)=>{deleteGoal(id, e)}} />     
+                       
                     </div>
                     
                 </div>

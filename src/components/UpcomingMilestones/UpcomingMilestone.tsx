@@ -18,7 +18,7 @@ export default function UpcomingMilestone(){
         filteredGoals = goalsLS.map(goal => {
             
             const filteredMilestones = goal.milestones.filter(milestone=>{
-                return mode?isDateWithinAWeekFromToday(milestone.endDate):true
+                return mode?isDateWithinARange(milestone.endDate, true):isDateWithinARange(milestone.endDate)
             })
 
             return filteredMilestones.length>0? 
@@ -63,19 +63,29 @@ export default function UpcomingMilestone(){
 
         useEffect(()=>{
             localStorage.setItem('mode', mode)            
-            console.log(localStorage.getItem('mode'))
         }, [mode])
 
 
-    function isDateWithinAWeekFromToday(targetDateString:string) {
+    function isDateWithinARange(targetDateString:string, isWithinAWeek=false) {
         const today = new Date();
-            
-        const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000;
-        const targetDateObj = new Date(targetDateString); 
-          
+        today.setHours(0, 0, 0)
+        const rangeInMillis = 7 * 24 * 60 * 60 * 1000;
+        
+        const [year, month, day] = targetDateString.split('-').map(Number);
+        const targetDateObj = new Date(year, month - 1, day);
+        targetDateObj.setHours(23, 59, 59)   
+
         const diff = targetDateObj.getTime() - today.getTime();
-          
-        return diff > 0 && diff <= oneWeekInMillis;
+       
+        console.log(targetDateString)
+        console.log(diff)
+        
+
+        if(isWithinAWeek){
+            return diff > 0 && diff <= rangeInMillis;
+        } else {
+            return diff > 0 
+        }
     }
     
       const milestoneElements = upcomingMilestones.map((milestone, index)=>{
